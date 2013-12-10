@@ -6,7 +6,7 @@
 
 <asp:Content ID="loginContent" ContentPlaceHolderID="MainContent" runat="server">
     <hgroup class="title">
-        <h1>Anmelden</h1>
+        <h1>Anmelden_</h1>
     </hgroup>
 
     <section id="loginForm">

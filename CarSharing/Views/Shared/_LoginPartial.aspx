@@ -5,9 +5,7 @@
         <%: Html.AntiForgeryToken() %>
         <a href="javascript:document.getElementById('logoutForm').submit()">Abmelden</a>
     <% } %>
-<% } else { %>
-    <ul>
-        <li><%: Html.ActionLink("Registrieren", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })%></li>
-        <li><%: Html.ActionLink("Anmelden", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })%></li>
-    </ul>
+<% } else { %>    
+        <p  style="margin-top: 0px;><%: Html.ActionLink("Registrieren", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })%>
+        <%: Html.ActionLink("Anmelden", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })%></p>
 <% } %>
