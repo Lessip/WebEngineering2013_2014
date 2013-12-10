@@ -16,6 +16,8 @@ namespace CarSharing.Models
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
+
+        public System.Data.Entity.DbSet<CarSharing.user> users { get; set; }
     }
 
     [Table("UserProfile")]

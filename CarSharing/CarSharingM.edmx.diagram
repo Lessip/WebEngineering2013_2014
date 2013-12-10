@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="79dd4e49dd114e06b8b4fd64acbbdf10" Name="Diagramm1">
+        <EntityTypeShape EntityType="CarSharingModel.car" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarSharingModel.car_type" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarSharingModel.contract" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarSharingModel.user" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarSharingModel.user_address" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <AssociationConnector Association="CarSharingModel.car_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="CarSharingModel.car_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="CarSharingModel.contract_ibfk_2" ManuallyRouted="false" />
+        <AssociationConnector Association="CarSharingModel.contract_ibfk_1" ManuallyRouted="false" />
+        <AssociationConnector Association="CarSharingModel.user_address_ibfk_1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
