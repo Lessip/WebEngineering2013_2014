@@ -14,7 +14,7 @@ namespace CarSharing.Views
         // GET: /Admin/
 
 
-        //[Log]
+        [Log]
         public ActionResult Index()
         {
             return View();

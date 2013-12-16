@@ -68,7 +68,7 @@ border:none;
 
 #nav li {
 	margin:0;
-	pading:0;
+	padding:0;
 	list-style:none;
 	float:left;
 }
@@ -261,3 +261,12 @@ search_button{
 	margin:20px 0 0 0;
 }
 
+table {
+    width:100%;
+}
+
+thead td {
+    color:#F1C21C;
+    background:#eee;
+    text-align:center;
+}

@@ -7,8 +7,36 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
 <h2>Admin</h2>
-    <div id="admin_users">Here is space for the users table</div>
-    <div id="admin_cars">Here is space for the cars table</div>
+    <table id="adminUserTable">
+        <thead>
+            <tr class="tableHead">
+                <td>ID</td>
+                <td>Name</td>
+                <td>Firstname</td>
+                <td>LogIn</td>
+                <td>AccessState</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <table id="adminCarTable">
+        <thead>
+            <tr class="tableHead">
+                <td>ID</td>
+                <td>Name</td>
+                <td>Licence</td>
+                <td>State</td>
+                <td>Type</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+    <%--<div id="admin_users">Here is space for the users table</div>
+    <div id="admin_cars">Here is space for the cars table</div>--%>
 
 </asp:Content>
 
