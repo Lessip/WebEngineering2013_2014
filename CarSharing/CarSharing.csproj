@@ -196,28 +196,28 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="car.cs">
-      <DependentUpon>CarSharingM.tt</DependentUpon>
+      <DependentUpon>CarSharingModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CarSharingM.Context.cs">
+    <Compile Include="CarSharingModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CarSharingM.Context.tt</DependentUpon>
+      <DependentUpon>CarSharingModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="CarSharingM.cs">
+    <Compile Include="CarSharingModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CarSharingM.tt</DependentUpon>
+      <DependentUpon>CarSharingModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CarSharingM.Designer.cs">
+    <Compile Include="CarSharingModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CarSharingM.edmx</DependentUpon>
+      <DependentUpon>CarSharingModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="car_type.cs">
-      <DependentUpon>CarSharingM.tt</DependentUpon>
+      <DependentUpon>CarSharingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="contract.cs">
-      <DependentUpon>CarSharingM.tt</DependentUpon>
+      <DependentUpon>CarSharingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -231,10 +231,10 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="RequiresPostSharp.cs" />
     <Compile Include="user.cs">
-      <DependentUpon>CarSharingM.tt</DependentUpon>
+      <DependentUpon>CarSharingModel.tt</DependentUpon>
     </Compile>
     <Compile Include="user_address.cs">
-      <DependentUpon>CarSharingM.tt</DependentUpon>
+      <DependentUpon>CarSharingModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -305,22 +305,22 @@
     <Content Include="CarSharing.psproj">
       <SubType>Designer</SubType>
     </Content>
-    <EntityDeploy Include="CarSharingM.edmx">
+    <EntityDeploy Include="CarSharingModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CarSharingM.Designer.cs</LastGenOutput>
+      <LastGenOutput>CarSharingModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="CarSharingM.Context.tt">
+    <Content Include="CarSharingModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarSharingM.edmx</DependentUpon>
-      <LastGenOutput>CarSharingM.Context.cs</LastGenOutput>
+      <DependentUpon>CarSharingModel.edmx</DependentUpon>
+      <LastGenOutput>CarSharingModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="CarSharingM.edmx.diagram">
-      <DependentUpon>CarSharingM.edmx</DependentUpon>
+    <Content Include="CarSharingModel.edmx.diagram">
+      <DependentUpon>CarSharingModel.edmx</DependentUpon>
     </Content>
-    <Content Include="CarSharingM.tt">
+    <Content Include="CarSharingModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CarSharingM.edmx</DependentUpon>
-      <LastGenOutput>CarSharingM.cs</LastGenOutput>
+      <DependentUpon>CarSharingModel.edmx</DependentUpon>
+      <LastGenOutput>CarSharingModel.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.0.3.js" />
@@ -379,8 +379,8 @@
     <Content Include="Views\Shared\_LoginPartial.aspx" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
