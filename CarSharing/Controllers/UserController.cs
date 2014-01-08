@@ -7,18 +7,17 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CarSharing;
-using CarSharing.Models;
 
 namespace CarSharing.Controllers
 {
     public class UserController : Controller
     {
-        private UsersContext db = new UsersContext();
+        private CarSharingEntities db = new CarSharingEntities();
 
         // GET: /User/
         public ActionResult Index()
         {
-            return View(db.users.ToList());
+            return View(db.user.ToList());
         }
 
         // GET: /User/Details/5
@@ -28,7 +27,7 @@ namespace CarSharing.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            user user = db.users.Find(id);
+            user user = db.user.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -47,11 +46,11 @@ namespace CarSharing.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="id,login_name,password,firstname,name,date_of_birth,identity_number,email,access_state")] user user)
+        public ActionResult Create([Bind(Include="id,login_name,firstname,name,date_of_birth,identity_number,password,email,access_state")] user user)
         {
             if (ModelState.IsValid)
             {
-                db.users.Add(user);
+                db.user.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +65,7 @@ namespace CarSharing.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            user user = db.users.Find(id);
+            user user = db.user.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -79,7 +78,7 @@ namespace CarSharing.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="id,login_name,password,firstname,name,date_of_birth,identity_number,email,access_state")] user user)
+        public ActionResult Edit([Bind(Include="id,login_name,firstname,name,date_of_birth,identity_number,password,email,access_state")] user user)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +96,7 @@ namespace CarSharing.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            user user = db.users.Find(id);
+            user user = db.user.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -110,8 +109,8 @@ namespace CarSharing.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            user user = db.users.Find(id);
-            db.users.Remove(user);
+            user user = db.user.Find(id);
+            db.user.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
