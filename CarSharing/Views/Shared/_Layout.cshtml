@@ -3,11 +3,20 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title-ECS</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <header>
+        <div id="top">            
+            <section id="login">
+                @Html.Partial("_LoginPartial")
+            </section>
+        </div>
+    </header>
+    
+    <!--
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -24,15 +33,29 @@
             </div>
         </div>
     </div>
+    -->
+
+    <div id="container">
+        <div id="nav">
+            <ul id="menu">
+                <li>@Html.ActionLink("Search Page", "Index", "Home")</li>
+                <li>@Html.ActionLink("link", "About" , "Home" )</li>
+                <li>@Html.ActionLink("link", "Contact" , "Home" )</li>
+                <li>@Html.ActionLink("LINK", "Index", "Home")</li>
+                <li>@Html.ActionLink("TEAM 8", "About", "Home")</li>
+                <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
+                <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+            </ul>
+        </div>
+    </div>
 
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Eiffeltower CarSharing</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
