@@ -1,0 +1,115 @@
+﻿@model CarSharing.car
+
+@{
+    ViewBag.Title = "CarDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CarDetails</h2>
+
+<div>
+    <h4>car</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.state)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.registration_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registration_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mileage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mileage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.aircon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.aircon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.navigation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.navigation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.transmission_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transmission_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.power)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.power)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.picture_link)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.picture_link)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.parking_pos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.parking_pos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.car_type.type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.car_type.type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.login_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.login_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
