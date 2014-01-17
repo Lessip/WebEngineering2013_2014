@@ -36,29 +36,24 @@
     -->
 
     <div id="container">
-        <div id="nav">
+        <div id="navMain" class="nav">
             <ul id="menu">
                 <li>@Html.ActionLink("Search Page", "Index", "Home")</li>
-                <li>@Html.ActionLink("link", "About" , "Home" )</li>
+                @*<li>@Html.ActionLink("link", "About" , "Home" )</li>
                 <li>@Html.ActionLink("link", "Contact" , "Home" )</li>
-                <li>@Html.ActionLink("LINK", "Index", "Home")</li>
+                <li>@Html.ActionLink("LINK", "Index", "Home")</li>*@
                 <li>@Html.ActionLink("TEAM 8", "About", "Home")</li>
                 <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
                 <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
             </ul>
         </div>
-    </div>
-    <div id="AdminContainer">
-        <div id="nav">
+        <div id="navAdmin" class="nav">
             <ul id="menu">
-                <li>@Html.ActionLink("Search Page", "Index", "Home")</li>
                 <li>@Html.ActionLink("Users", "UserView", "Admin")</li>
                 <li>@Html.ActionLink("Cars", "CarView", "Admin")</li>
             </ul>
         </div>
     </div>
-
-
 
     <div class="container body-content">
         @RenderBody()
