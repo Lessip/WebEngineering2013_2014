@@ -21,11 +21,10 @@ namespace CarSharing
     
         public int id { get; set; }
         public int car_type_id { get; set; }
-        public Nullable<int> user_id { get; set; }
         public Nullable<int> state { get; set; }
         public string name { get; set; }
         public string registration_number { get; set; }
-        public int mileage { get; set; }
+        public Nullable<int> mileage { get; set; }
         public Nullable<bool> aircon { get; set; }
         public Nullable<bool> navigation { get; set; }
         public Nullable<bool> transmission_type { get; set; }
@@ -35,6 +34,5 @@ namespace CarSharing
     
         public virtual ICollection<contract> contract { get; set; }
         public virtual car_type car_type { get; set; }
-        public virtual user user { get; set; }
     }
 }

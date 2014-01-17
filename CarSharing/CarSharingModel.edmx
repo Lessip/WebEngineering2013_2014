@@ -4,18 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CarSharingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CarSharingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="car">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="car_type_id" Type="int" Nullable="false" />
-          <Property Name="user_id" Type="int" />
           <Property Name="state" Type="int" />
           <Property Name="name" Type="text" />
           <Property Name="registration_number" Type="text" />
-          <Property Name="mileage" Type="int" Nullable="false" />
+          <Property Name="mileage" Type="int" />
           <Property Name="aircon" Type="bit" />
           <Property Name="navigation" Type="bit" />
           <Property Name="transmission_type" Type="bit" />
@@ -27,23 +26,23 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="type" Type="text" Nullable="false" />
-          <Property Name="size" Type="int" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="text" />
+          <Property Name="seat_size" Type="int" />
           <Property Name="class" Type="int" />
-          <Property Name="price" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="price" Type="money" />
         </EntityType>
         <EntityType Name="contract">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="car_id" Type="int" Nullable="false" />
           <Property Name="pick_up_date" Type="datetime" Nullable="false" />
           <Property Name="return_date" Type="datetime" Nullable="false" />
-          <Property Name="start_location" Type="text" Nullable="false" />
-          <Property Name="end_location" Type="text" Nullable="false" />
+          <Property Name="start_location" Type="text" />
+          <Property Name="end_location" Type="text" />
           <Property Name="distance" Type="int" />
           <Property Name="price" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
@@ -51,12 +50,12 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="login_name" Type="text" Nullable="false" />
           <Property Name="firstname" Type="text" Nullable="false" />
           <Property Name="name" Type="text" Nullable="false" />
           <Property Name="date_of_birth" Type="date" Nullable="false" />
-          <Property Name="identity_number" Type="text" Nullable="false" />
+          <Property Name="identity_number" Type="text" />
           <Property Name="password" Type="text" Nullable="false" />
           <Property Name="email" Type="text" Nullable="false" />
           <Property Name="access_state" Type="int" />
@@ -65,7 +64,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
           <Property Name="street" Type="text" Nullable="false" />
           <Property Name="post_code" Type="text" Nullable="false" />
@@ -107,18 +106,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_user_car">
-          <End Role="user" Type="Self.user" Multiplicity="0..1" />
-          <End Role="car" Type="Self.car" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="car">
-              <PropertyRef Name="user_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_user_contract">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="contract" Type="Self.contract" Multiplicity="*" />
@@ -149,17 +136,12 @@
             <End Role="user" EntitySet="user" />
             <End Role="user_address" EntitySet="user_address" />
           </AssociationSet>
-          <AssociationSet Name="FK_user_car" Association="Self.FK_user_car">
-            <End Role="user" EntitySet="user" />
-            <End Role="car" EntitySet="car" />
-          </AssociationSet>
           <AssociationSet Name="FK_user_contract" Association="Self.FK_user_contract">
             <End Role="user" EntitySet="user" />
             <End Role="contract" EntitySet="contract" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarSharingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -169,11 +151,10 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="car_type_id" Type="Int32" Nullable="false" />
-          <Property Name="user_id" Type="Int32" />
           <Property Name="state" Type="Int32" />
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="registration_number" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="mileage" Type="Int32" Nullable="false" />
+          <Property Name="mileage" Type="Int32" />
           <Property Name="aircon" Type="Boolean" />
           <Property Name="navigation" Type="Boolean" />
           <Property Name="transmission_type" Type="Boolean" />
@@ -182,18 +163,17 @@
           <Property Name="parking_pos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="contract" Relationship="Self.FK_car_contract" FromRole="car" ToRole="contract" />
           <NavigationProperty Name="car_type" Relationship="Self.FK_type_car" FromRole="car" ToRole="car_type" />
-          <NavigationProperty Name="user" Relationship="Self.FK_user_car" FromRole="car" ToRole="user" />
         </EntityType>
         <EntityType Name="car_type">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="size" Type="Int32" />
+          <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="class" Type="Int32" />
-          <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="car" Relationship="Self.FK_type_car" FromRole="car_type" ToRole="car" />
+          <Property Name="seat_size" Type="Int32" />
         </EntityType>
         <EntityType Name="contract">
           <Key>
@@ -204,8 +184,8 @@
           <Property Name="car_id" Type="Int32" Nullable="false" />
           <Property Name="pick_up_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="return_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="start_location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="end_location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="start_location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="end_location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="distance" Type="Int32" />
           <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="car" Relationship="Self.FK_car_contract" FromRole="contract" ToRole="car" />
@@ -220,11 +200,10 @@
           <Property Name="firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="identity_number" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="identity_number" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="access_state" Type="Int32" />
-          <NavigationProperty Name="car" Relationship="Self.FK_user_car" FromRole="user" ToRole="car" />
           <NavigationProperty Name="contract" Relationship="Self.FK_user_contract" FromRole="user" ToRole="contract" />
           <NavigationProperty Name="user_address" Relationship="Self.FK_user_address" FromRole="user" ToRole="user_address" />
         </EntityType>
@@ -260,18 +239,6 @@
             </Principal>
             <Dependent Role="car">
               <PropertyRef Name="car_type_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_user_car">
-          <End Role="user" Type="Self.user" Multiplicity="0..1" />
-          <End Role="car" Type="Self.car" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="user">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="car">
-              <PropertyRef Name="user_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -313,10 +280,6 @@
             <End Role="car_type" EntitySet="car_type" />
             <End Role="car" EntitySet="car" />
           </AssociationSet>
-          <AssociationSet Name="FK_user_car" Association="Self.FK_user_car">
-            <End Role="user" EntitySet="user" />
-            <End Role="car" EntitySet="car" />
-          </AssociationSet>
           <AssociationSet Name="FK_user_contract" Association="Self.FK_user_contract">
             <End Role="user" EntitySet="user" />
             <End Role="contract" EntitySet="contract" />
@@ -337,7 +300,6 @@
               <MappingFragment StoreEntitySet="car">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="car_type_id" ColumnName="car_type_id" />
-                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="state" ColumnName="state" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="registration_number" ColumnName="registration_number" />
@@ -354,9 +316,9 @@
           <EntitySetMapping Name="car_type">
             <EntityTypeMapping TypeName="CarSharingModel.car_type">
               <MappingFragment StoreEntitySet="car_type">
+                <ScalarProperty Name="seat_size" ColumnName="seat_size" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="size" ColumnName="size" />
                 <ScalarProperty Name="class" ColumnName="class" />
                 <ScalarProperty Name="price" ColumnName="price" />
               </MappingFragment>

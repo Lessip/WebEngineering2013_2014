@@ -16,7 +16,6 @@ namespace CarSharing
     {
         public user()
         {
-            this.car = new HashSet<car>();
             this.contract = new HashSet<contract>();
             this.user_address = new HashSet<user_address>();
         }
@@ -31,7 +30,6 @@ namespace CarSharing
         public string email { get; set; }
         public Nullable<int> access_state { get; set; }
     
-        public virtual ICollection<car> car { get; set; }
         public virtual ICollection<contract> contract { get; set; }
         public virtual ICollection<user_address> user_address { get; set; }
     }
