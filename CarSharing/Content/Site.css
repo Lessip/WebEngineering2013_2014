@@ -12,9 +12,11 @@ body {
 }
 
 #top {
-	width:715px;
+	//width:715px;
+    width:80%;
 	padding:12px 25px 1px 25px;
-	background-image:url(../images/top.jpg);
+	//background-image:url(../images/top.jpg);
+    background:#000;
 	background-position:top;
 	background-repeat:no-repeat;
 	color:#fff;
@@ -43,16 +45,19 @@ border:none;
 }
 
 #container {
-	width:765px;
-	margin:0 auto;
-	background-image:url(../images/header.jpg);
+	//width:765px;
+    width:80%;
+	margin:5px auto;
+    background:#fff;
+	//background-image:url(../images/header.jpg);
 	background-position:top;
 	background-repeat:no-repeat;
 	padding:30px 0 0 0;
 }
 
 #menu {
-	width:706px;
+	//width:706px;
+    width:100%;
 	margin:0 auto;
 	text-align:left;
 	background-image:url(../images/menu.jpg);
@@ -62,18 +67,23 @@ border:none;
 
 #menu #nav {
 	margin:0;
-	padding:0;
+	//padding:-40px;
 	float:left;
 }
 
-#nav li {
+.nav
+{
+    margin-left:-40px;
+}
+
+.nav li {
 	margin:0;
 	padding:0;
 	list-style:none;
 	float:left;
 }
 
-#nav li a {
+.nav li a {
 	display:block;
 	width:100px;
 	text-align:center;
@@ -88,24 +98,24 @@ border:none;
 	font-weight:bold;
 	text-decoration:none;
 	padding:55px 0 23px 0;
-border:none;
+    border:none;
 }
-#nav li a em {
+.nav li a em {
 	font-style:normal;
 	text-decoration:underline;
 }
 
-#nav li a.last {
+.nav li a.last {
 	margin:0;
 }
 
-#nav li a:hover {
+.nav li a:hover {
 	background-image:url(../images/menu_link.jpg);
 	background-position:right;
 	color:#fff;
 }
 
-#nav li a.active {
+.nav li a.active {
 	background-image:url(../images/menu_link.jpg);
 	background-position:right;
 	color:#fff;
@@ -181,6 +191,13 @@ border:none;
 	padding:0;
 	border-top:1px solid #eee;
 }
+
+.body-content
+{
+    width:80%;
+    margin:100px auto;
+}
+
 .linkroll li {
 	margin:1px;
 	padding:0 !important;
