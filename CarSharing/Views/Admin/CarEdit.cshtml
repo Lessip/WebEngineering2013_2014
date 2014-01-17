@@ -1,0 +1,126 @@
+﻿@model CarSharing.car
+
+@{
+    ViewBag.Title = "CarEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CarEdit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>car</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.car_type_id, "car_type_id", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.car_type_id)
+                @Html.ValidationMessageFor(model => model.car_type_id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.user_id, "user_id", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.user_id)
+                @Html.ValidationMessageFor(model => model.user_id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.state, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.state)
+                @Html.ValidationMessageFor(model => model.state)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.name)
+                @Html.ValidationMessageFor(model => model.name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.registration_number, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.registration_number)
+                @Html.ValidationMessageFor(model => model.registration_number)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.mileage, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.mileage)
+                @Html.ValidationMessageFor(model => model.mileage)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.aircon, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.aircon.Value)
+                @Html.ValidationMessageFor(model => model.aircon)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.navigation, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.navigation.Value)
+                @Html.ValidationMessageFor(model => model.navigation)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.transmission_type, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(model => model.transmission_type.Value)
+                @Html.ValidationMessageFor(model => model.transmission_type)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.power, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.power)
+                @Html.ValidationMessageFor(model => model.power)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.picture_link, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.picture_link)
+                @Html.ValidationMessageFor(model => model.picture_link)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.parking_pos, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.parking_pos)
+                @Html.ValidationMessageFor(model => model.parking_pos)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "CarView")
+</div>

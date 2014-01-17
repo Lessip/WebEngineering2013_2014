@@ -1,0 +1,99 @@
+﻿@model IEnumerable<CarSharing.car>
+
+@{
+    ViewBag.Title = "CarView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CarView</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CarCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Car type
+        </th>
+        <th>
+            User ID
+        </th>
+        <th>
+            State
+        </th>
+        <th>
+            Car Model
+        </th>
+        <th>
+            Registration number
+        </th>
+        <th>
+            Mileage
+        </th>
+        <th>
+            Aircondition
+        </th>
+        <th>
+            Navigation
+        </th>
+        <th>
+            Transmission type
+        </th>
+        <th>
+            Power [HP]
+        </th>
+        <th>
+            Image link
+        </th>
+        <th>
+            Parking position
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.car_type_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.state)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.registration_number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mileage)
+            </td>
+            <td>
+                @Html.CheckBoxFor(modelItem => item.aircon.Value)
+            </td>
+            <td>
+                @Html.CheckBoxFor(modelItem => item.navigation.Value)
+            </td>
+            <td>
+                @Html.CheckBoxFor(modelItem => item.transmission_type.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.power)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.picture_link)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.parking_pos)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "CarEdit", new { id = item.id }) |
+                @Html.ActionLink("Details", "CarDetails", new { id = item.id }) |
+                @Html.ActionLink("Delete", "CarDelete", new { id = item.id })
+            </td>
+        </tr>
+    }
+</table>

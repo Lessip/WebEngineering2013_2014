@@ -1,0 +1,121 @@
+﻿@model CarSharing.car
+
+@{
+    ViewBag.Title = "CarDelete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CarDelete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>car</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.state)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.registration_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registration_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mileage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mileage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.aircon)
+        </dt>
+
+        <dd>
+            @Html.CheckBoxFor(model => (bool)model.aircon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.navigation)
+        </dt>
+
+        <dd>
+            @Html.CheckBoxFor(model => (bool)model.navigation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.transmission_type)
+        </dt>
+
+        <dd>
+            @Html.CheckBoxFor(model => (bool)model.transmission_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.power)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.power)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.picture_link)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.picture_link)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.parking_pos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.parking_pos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.car_type.type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.car_type.type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user.login_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user.login_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "CarView")
+        </div>
+    }
+</div>
