@@ -14,6 +14,7 @@ using System.Threading;
 using System.ComponentModel;
 using System.Windows.Forms;
 
+
 namespace CarSharing.Controllers
 {
     public class RegistrationController : Controller
@@ -41,16 +42,13 @@ namespace CarSharing.Controllers
         {
             if (ModelState.IsValid)
             {
-                //generate the link
-                var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                var random = new Random();
-                var result = new string(
-                    Enumerable.Repeat(chars, 8)
-                              .Select(s => s[random.Next(s.Length)])
-                              .ToArray());
+                //generate identity_number
+                Guid result = Guid.NewGuid();
 
                 // generate the timestamp in DB
-                // var timestamp=DateTime.Now;
+                user.timelimit = System.DateTime.Now.AddDays(1).Date;
+                
+
                 user.access_state = 0;
                 user.identity_number = result;
                 db.user.Add(user);
@@ -69,7 +67,7 @@ namespace CarSharing.Controllers
                     var hosturl =
                             System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) +
                             "/Registration/ConfirmRegistration?id=" + user.id+
-                            "identity_number=" + user.identity_number;
+                            "&identity_number=" + user.identity_number;
                     var confirmationLink = string.Format("<a href=\"{0}\">Click to confirm your registration</a>",
                                                              hosturl);
                     string To = user.email;
@@ -96,39 +94,38 @@ namespace CarSharing.Controllers
                 }
 
              }
-            return View("Registrate");
+            return View("../Home/Index");
         }
-
+      
         public ActionResult ConfirmRegistration(user user)
-        {
-            //user user;
-            //user.getByIdentity(identity_number);
-           
-
-            if (user!= null)
+        {          
+               
+            // TO DO timestamp
+            if ((user != null) && (user.timelimit >= System.DateTime.Now))
             {
-                return RedirectToAction("ConfirmationSuccess");
+                return RedirectToAction("ConfirmationSuccess", new {  id= user.id, identity_number = user.identity_number });
             }
             return RedirectToAction("ConfirmationFailure");
         }
 
-        public ActionResult ConfirmationSuccess(user user)
+        public ActionResult ConfirmationSuccess(int id, string identity_number)
         {
-            //user user;
-             //user.access_state = 1;
-            user u=db.user.Find(user.id);
-            Console.Write("sdflsjdf"+u);
-            //user.access_state = 1;
-            //db.SaveChanges();
-            
+           
+            string text = Convert.ToString(Request.QueryString["identity_number"]);
+            Guid idNumber = Guid.Parse(text);
+            Console.Write(text);
+            var row = (from usr in db.user where usr.identity_number == idNumber select usr).Single();
+            row.access_state = 1;
+            db.SaveChanges();
+           
             MessageBox.Show("you register success. Please Log in", "registration message", MessageBoxButtons.OK);
-            return View(); 
+            return View("../Home/Index"); 
         }
 
         public ActionResult ConfirmationFailure()
            {
                MessageBox.Show("registration message", "confirmation failure. Please Register once more", MessageBoxButtons.OK);
-               return View(); 
+               return View("Registrate"); 
            }
         protected override void Dispose(bool disposing)
         {
