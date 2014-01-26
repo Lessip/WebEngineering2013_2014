@@ -246,9 +246,6 @@ border-bottom:1px solid #999;
 }
 
 
-button{
-   
-}
 
 search_button{
 
@@ -286,4 +283,11 @@ thead td {
     color:#F1C21C;
     background:#eee;
     text-align:center;
+}
+
+#rss{
+     background-image:url(../Images/rss.png); 
+     height: 32px;
+     width: 32px;
+     margin-left: 1200px;
 }

@@ -7,15 +7,22 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+
 <body>
     <header>
-        <div id="top">            
+        <div id="top">
             <section id="login">
                 @Html.ActionLink("Registrate", "Registrate", "Registration")
             </section>
         </div>
+        <button id="rss" onclick="rss()"/>
+        <script type="text/javascript">
+            function rss() {
+                window.open('@Url.Action("RSS", "RSS")');    
+            }
+        </script>
     </header>
-    
+
     <!--
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
