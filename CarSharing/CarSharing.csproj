@@ -333,6 +333,7 @@
       <LastGenOutput>CarSharingModel.cs</LastGenOutput>
     </Content>
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Images\car-icon.png" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />
@@ -356,7 +357,6 @@
     <Content Include="Views\Account\_ExternalLoginsListPartial.aspx" />
     <Content Include="Views\Account\_RemoveExternalLoginsPartial.aspx" />
     <Content Include="Views\Account\_SetPasswordPartial.aspx" />
-    <Content Include="Views\Admin\Index.aspx" />
     <Content Include="Views\Registration\Contact.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -384,7 +384,6 @@
     <Content Include="Images\orderedList9.png" />
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Contact.aspx" />
-    <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\_LoginPartial.aspx" />
     <Content Include="Views\Shared\Site.Master" />
@@ -414,6 +413,7 @@
     <Content Include="Views\Admin\CarDelete.cshtml" />
     <Content Include="Views\Admin\CarDetails.cshtml" />
     <Content Include="Views\Admin\CarEdit.cshtml" />
+    <Content Include="Views\Home\SelectLocation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
