@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CarSharing.car>
+﻿@model List<CarSharing.Models.CarProfile>
 
 @{
     ViewBag.Title = "CarView";
@@ -13,10 +13,7 @@
 <table class="table">
     <tr>
         <th>
-            Car type
-        </th>
-        <th>
-            User ID
+            Id
         </th>
         <th>
             State
@@ -48,16 +45,25 @@
         <th>
             Parking position
         </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Seats
+        </th>
+        <th>
+            Class
+        </th>
+        <th>
+            Price
+        </th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.car_type_id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.user_id)
+                @Html.DisplayFor(modelItem => item.id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.state)
@@ -72,13 +78,13 @@
                 @Html.DisplayFor(modelItem => item.mileage)
             </td>
             <td>
-                @Html.CheckBoxFor(modelItem => item.aircon.Value)
+                @Html.CheckBoxFor(modelItem => item.aircon)
             </td>
             <td>
-                @Html.CheckBoxFor(modelItem => item.navigation.Value)
+                @Html.CheckBoxFor(modelItem => item.navigation)
             </td>
             <td>
-                @Html.CheckBoxFor(modelItem => item.transmission_type.Value)
+                @Html.CheckBoxFor(modelItem => item.transmission_type)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.power)
@@ -88,6 +94,18 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.parking_pos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.seat_size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.car_class)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
             </td>
             <td>
                 @Html.ActionLink("Edit", "CarEdit", new { id = item.id }) |

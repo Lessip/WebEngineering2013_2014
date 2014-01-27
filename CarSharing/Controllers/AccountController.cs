@@ -265,12 +265,12 @@ namespace CarSharing.Controllers
                 // Neuen Benutzer in die Datenbank einfügen
                 using (UsersContext db = new UsersContext())
                 {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.login_name.ToLower() == model.UserName.ToLower());
                     // Überprüfen, ob der Benutzer bereits vorhanden ist
                     if (user == null)
                     {
                         // Name in die Profiltabelle einfügen
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        db.UserProfiles.Add(new UserProfile { login_name = model.UserName });
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);

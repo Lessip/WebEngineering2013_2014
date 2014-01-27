@@ -1,4 +1,4 @@
-﻿@model CarSharing.car
+﻿@model CarSharing.Models.CarProfile
 
 @{
     ViewBag.Title = "CarDetails";
@@ -11,6 +11,14 @@
     <h4>car</h4>
 	<hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.state)
         </dt>
@@ -90,26 +98,41 @@
         <dd>
             @Html.DisplayFor(model => model.parking_pos)
         </dd>
-
+        
         <dt>
-            @Html.DisplayNameFor(model => model.car_type.type)
+            @Html.DisplayNameFor(model => model.type)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.car_type.type)
+            @Html.DisplayFor(model => model.type)
         </dd>
-
+        
         <dt>
-            @Html.DisplayNameFor(model => model.user.login_name)
+            @Html.DisplayNameFor(model => model.seat_size)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.user.login_name)
+            @Html.DisplayFor(model => model.seat_size)
         </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.car_class)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.car_class)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price)
+        </dd>        
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "CarView")
 </p>

@@ -13,7 +13,7 @@ body {
 
 #top {
 	//width:715px;
-    width:80%;
+    width:90%;
 	padding:12px 25px 1px 25px;
 	//background-image:url(../images/top.jpg);
     background:#000;
@@ -41,12 +41,12 @@ border:none;
 #top b a {
 	border-left:1px dotted #ccc;
 	border-right:none;
-border:none;
+    border:none;
 }
 
 #container {
 	//width:765px;
-    width:80%;
+    width:90%;
 	margin:5px auto;
     background:#fff;
 	//background-image:url(../images/header.jpg);
@@ -194,7 +194,7 @@ border:none;
 
 .body-content
 {
-    width:80%;
+    width:90%;
     margin:100px auto;
 }
 

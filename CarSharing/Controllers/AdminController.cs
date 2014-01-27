@@ -25,12 +25,55 @@ namespace CarSharing.Views
         
         public ActionResult UserView()
         {
-            return View(db.user.ToList());
+           // Simply join the table user_address (from the right) to the table user
+           var queryResult = from userId in db.user
+                             join userAddress in db.user_address 
+                             on userId.id equals userAddress.user_id
+                             select new CarSharing.Models.UserProfile
+           { 
+                id = userId.id,
+                login_name = userId.login_name,
+                firstname = userId.firstname,
+                name = userId.name,
+                date_of_birth = userId.date_of_birth,
+                identity_number = userId.identity_number,
+                password = userId.password,
+                email = userId.email,
+                access_state = (int)userId.access_state,
+                street = userAddress.street,
+                post_code = userAddress.post_code,
+                city = userAddress.city
+            };
+
+            return View(queryResult.ToList());
         }
 
         public ActionResult CarView()
         {
-            return View(db.car.ToList());
+            // Simply join the table user_address (from the right) to the table user
+            var queryResult = from carId in db.car
+                              join carType in db.car_type
+                              on carId.car_type_id equals carType.id
+                              select new CarSharing.Models.CarProfile
+                              {
+                                  id = carId.id,
+                                  car_type_id = carId.car_type_id,
+                                  state = (int)carId.state,
+                                  name = carId.name,
+                                  registration_number = carId.registration_number,
+                                  mileage = (int)carId.mileage,
+                                  aircon = (Boolean)carId.aircon,
+                                  navigation = (Boolean)carId.navigation,
+                                  transmission_type = (Boolean)carId.transmission_type,
+                                  power = (int)carId.power,
+                                  picture_link = carId.picture_link,
+                                  parking_pos = carId.parking_pos,
+                                  seat_size = (int)carType.seat_size,
+                                  car_class = (int)carType.car_class,
+                                  price = (int)carType.price
+                              };
+
+            return View(queryResult.ToList());
         }        
 
         // GET: /Admin/UserCreate
@@ -44,15 +87,45 @@ namespace CarSharing.Views
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserCreate([Bind(Include = "login_name,password,firstname,name,date_of_birth,identity_number,email,access_state")] user user)
+        public ActionResult UserCreate([Bind(Include = "login_name,password,firstname,name,date_of_birth,identity_number,email,access_state,street,post_code,city")] CarSharing.Models.UserProfile user)
         {
             if (ModelState.IsValid)
             {
-                db.user.Add(user);
+                user_account userAccount = new user_account();
+                userAccount.login_name = user.login_name;
+                userAccount.password = user.password;
+                userAccount.firstname = user.firstname;
+                userAccount.name = user.name;
+                userAccount.date_of_birth = user.date_of_birth;
+                userAccount.identity_number = user.identity_number;
+                userAccount.email = user.email;
+                userAccount.access_state = user.access_state;
+                user_address userAddress = new user_address();
+                userAddress.street = user.street;
+                userAddress.post_code = user.post_code;
+                userAddress.city = user.city;
+
+                db.user.Add(userAccount);
+                db.user_address.Add(userAddress);
                 db.SaveChanges();
                 return RedirectToAction("UserView");
             }
 
+            return View(user);
+        }
+
+        // GET: /Admin/UserEdit/5
+        public ActionResult UserDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            user_account user = db.user.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
             return View(user);
         }
 
@@ -63,7 +136,7 @@ namespace CarSharing.Views
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            user user = db.user.Find(id);
+            user_account user = db.user.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -76,10 +149,24 @@ namespace CarSharing.Views
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UserEdit([Bind(Include = "login_name,firstname,name,date_of_birth,identity_number,password,email,access_state")] user user)
+        public ActionResult UserEdit([Bind(Include = "id,login_name,firstname,name,date_of_birth,identity_number,password,email,access_state,street,post_code,city")] CarSharing.Models.UserProfile user)
         {
             if (ModelState.IsValid)
             {
+                //user_account userAccount = new user_account();
+                //userAccount.login_name = user.login_name;
+                //userAccount.password = user.password;
+                //userAccount.firstname = user.firstname;
+                //userAccount.name = user.name;
+                //userAccount.date_of_birth = user.date_of_birth;
+                //userAccount.identity_number = user.identity_number;
+                //userAccount.email = user.email;
+                //userAccount.access_state = user.access_state;
+                //user_address userAddress = new user_address();
+                //userAddress.street = user.street;
+                //userAddress.post_code = user.post_code;
+                //userAddress.city = user.city;
+
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("UserView");
@@ -94,7 +181,7 @@ namespace CarSharing.Views
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            user user = db.user.Find(id);
+            user_account user = db.user.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -107,7 +194,7 @@ namespace CarSharing.Views
         [ValidateAntiForgeryToken]
         public ActionResult UserDeleteConfirmed(int id)
         {
-            user user = db.user.Find(id);
+            user_account user = db.user.Find(id);
             db.user.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -124,15 +211,44 @@ namespace CarSharing.Views
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CarCreate([Bind(Include = "car_type_id,user_id,state,name,registration_number,mileage,aircon,navigation,transmission_type,power,picture_link,parking_pos")] car car)
+        //public ActionResult CarCreate([Bind(Include = "car_type_id,state,name,registration_number,mileage,aircon,navigation,transmission_type,power,picture_link,parking_pos")] CarSharing.Models.CarProfile car)
+        public ActionResult CarCreate([Bind(Include = "car_type_id,state,name,registration_number,mileage,aircon,navigation,transmission_type,power,picture_link,parking_pos")] car car)
         {
             if (ModelState.IsValid)
             {
+                //car carID = new car();
+                //carID.car_type_id = car.car_type_id;
+                //carID.state = car.state;
+                //carID.name = car.name;
+                //carID.registration_number = car.registration_number;
+                //carID.mileage = car.mileage;
+                //carID.aircon = car.aircon;
+                //carID.navigation = car.navigation;
+                //carID.transmission_type = car.transmission_type;
+                //carID.power = car.power;
+                //carID.picture_link = car.picture_link;
+                //carID.parking_pos = car.parking_pos;
+
                 db.car.Add(car);
                 db.SaveChanges();
                 return RedirectToAction("CarView");
             }
 
+            return View(car);
+        }
+
+        // GET: /Admin/CarEdit/5
+        public ActionResult CarDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            car car = db.car.Find(id);
+            if (car == null)
+            {
+                return HttpNotFound();
+            }
             return View(car);
         }
 
@@ -156,7 +272,7 @@ namespace CarSharing.Views
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CarEdit([Bind(Include = "car_type_id,user_id,state,name,registration_number,mileage,aircon,navigation,transmission_type,power,picture_link,parking_pos")] car car)
+        public ActionResult CarEdit([Bind(Include = "id,car_type_id,state,name,registration_number,mileage,aircon,navigation,transmission_type,power,picture_link,parking_pos")] car car)
         {
             if (ModelState.IsValid)
             {

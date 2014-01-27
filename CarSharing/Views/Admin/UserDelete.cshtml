@@ -1,4 +1,4 @@
-﻿@model CarSharing.user
+﻿@model CarSharing.Models.UserProfile
 
 @{
     ViewBag.Title = "UserDelete";
@@ -76,6 +76,29 @@
             @Html.DisplayFor(model => model.access_state)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.street)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.street)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.post_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.post_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.city)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.city)
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {

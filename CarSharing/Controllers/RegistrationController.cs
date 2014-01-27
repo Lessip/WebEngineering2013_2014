@@ -37,7 +37,7 @@ namespace CarSharing.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Registrate([Bind(Include = "login_name,firstname,name,date_of_birth,identity_number,password,email")] user user)
+        public ActionResult Registrate([Bind(Include = "login_name,firstname,name,date_of_birth,identity_number,password,email")] user_account user)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace CarSharing.Controllers
             return View("Registrate");
         }
 
-        public ActionResult ConfirmRegistration(user user)
+        public ActionResult ConfirmRegistration(user_account user)
         {
             //user user;
             //user.getByIdentity(identity_number);
@@ -112,11 +112,11 @@ namespace CarSharing.Controllers
             return RedirectToAction("ConfirmationFailure");
         }
 
-        public ActionResult ConfirmationSuccess(user user)
+        public ActionResult ConfirmationSuccess(user_account user)
         {
             //user user;
              //user.access_state = 1;
-            user u=db.user.Find(user.id);
+            user_account u=db.user.Find(user.id);
             Console.Write("sdflsjdf"+u);
             //user.access_state = 1;
             //db.SaveChanges();

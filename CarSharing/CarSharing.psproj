@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.postsharp.org/1.0/configuration" xmlns:dg="clr-namespace:PostSharp.Patterns.Diagnostics;assembly:PostSharp.Patterns.Diagnostics">
   <Property Name="LoggingBackend" Value="Trace" />
-  <Using File="..\packages\PostSharp.Patterns.Diagnostics.3.1.28\tools\PostSharp.Patterns.Diagnostics.Weaver.dll" />
+  <Using File="..\packages\PostSharp.Patterns.Diagnostics.3.1.29\tools\PostSharp.Patterns.Diagnostics.Weaver.dll" />
   <dg:LoggingProfiles>
     <dg:LoggingProfile Name="Default" OnEntryOptions="IncludeParameterType | IncludeParameterName | IncludeParameterValue | IncludeThisArgument" OnSuccessOptions="IncludeParameterType | IncludeParameterName | IncludeParameterValue | IncludeReturnValue | IncludeThisArgument" OnExceptionOptions="IncludeParameterType | IncludeParameterName | IncludeParameterValue | IncludeThisArgument" OnExceptionLevel="Info" />
     <dg:LoggingProfile Name="MethodEnters_full" OnEntryOptions="IncludeParameterType | IncludeParameterName | IncludeParameterValue | IncludeReturnValue | IncludeThisArgument" OnExceptionLevel="None" OnSuccessLevel="None" />

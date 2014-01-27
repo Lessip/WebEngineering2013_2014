@@ -1,4 +1,4 @@
-﻿@model CarSharing.car
+﻿@model CarSharing.Models.CarProfile
 
 @{
     ViewBag.Title = "CarCreate";
@@ -21,14 +21,6 @@
             <div class="col-md-10">
                 @Html.DropDownList("car_type_id", String.Empty)
                 @Html.ValidationMessageFor(model => model.car_type_id)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.user_id, "user_id", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.user_id)
-                @Html.ValidationMessageFor(model => model.user_id)
             </div>
         </div>
 
@@ -109,6 +101,38 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.parking_pos)
                 @Html.ValidationMessageFor(model => model.parking_pos)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.type, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.type)
+                @Html.ValidationMessageFor(model => model.type)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.seat_size, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.seat_size)
+                @Html.ValidationMessageFor(model => model.seat_size)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.car_class, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.car_class)
+                @Html.ValidationMessageFor(model => model.car_class)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.price)
+                @Html.ValidationMessageFor(model => model.price)
             </div>
         </div>
 

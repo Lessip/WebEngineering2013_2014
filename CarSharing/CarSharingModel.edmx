@@ -170,7 +170,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="class" Type="Int32" />
+          <Property Name="car_class" Type="Int32" />
           <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="car" Relationship="Self.FK_type_car" FromRole="car_type" ToRole="car" />
           <Property Name="seat_size" Type="Int32" />
@@ -191,7 +191,7 @@
           <NavigationProperty Name="car" Relationship="Self.FK_car_contract" FromRole="contract" ToRole="car" />
           <NavigationProperty Name="user" Relationship="Self.FK_user_contract" FromRole="contract" ToRole="user" />
         </EntityType>
-        <EntityType Name="user">
+        <EntityType Name="user_account">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -243,7 +243,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_user_contract">
-          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user" Type="CarSharingModel.user_account" Multiplicity="1" />
           <End Role="contract" Type="Self.contract" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user">
@@ -255,7 +255,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_user_address">
-          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="user" Type="CarSharingModel.user_account" Multiplicity="1" />
           <End Role="user_address" Type="Self.user_address" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user">
@@ -270,7 +270,7 @@
           <EntitySet Name="car" EntityType="Self.car" />
           <EntitySet Name="car_type" EntityType="Self.car_type" />
           <EntitySet Name="contract" EntityType="Self.contract" />
-          <EntitySet Name="user" EntityType="Self.user" />
+          <EntitySet Name="user" EntityType="CarSharingModel.user_account" />
           <EntitySet Name="user_address" EntityType="Self.user_address" />
           <AssociationSet Name="FK_car_contract" Association="Self.FK_car_contract">
             <End Role="car" EntitySet="car" />
@@ -319,7 +319,7 @@
                 <ScalarProperty Name="seat_size" ColumnName="seat_size" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="type" ColumnName="type" />
-                <ScalarProperty Name="class" ColumnName="class" />
+                <ScalarProperty Name="car_class" ColumnName="class" />
                 <ScalarProperty Name="price" ColumnName="price" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -340,7 +340,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="user">
-            <EntityTypeMapping TypeName="CarSharingModel.user">
+            <EntityTypeMapping TypeName="CarSharingModel.user_account">
               <MappingFragment StoreEntitySet="user">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="login_name" ColumnName="login_name" />

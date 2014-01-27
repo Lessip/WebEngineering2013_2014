@@ -18,26 +18,18 @@
         @Html.HiddenFor(model => model.id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.car_type_id, "car_type_id", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.id, "car_type_id", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.id)
+                @Html.ValidationMessageFor(model => model.id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.car_type_id, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.car_type_id)
                 @Html.ValidationMessageFor(model => model.car_type_id)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.user_id, "user_id", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.user_id)
-                @Html.ValidationMessageFor(model => model.user_id)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.state, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.state)
-                @Html.ValidationMessageFor(model => model.state)
             </div>
         </div>
 
@@ -68,7 +60,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.aircon, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.CheckBoxFor(model => model.aircon.Value)
+                @Html.CheckBoxFor(model => (Boolean)model.aircon)
                 @Html.ValidationMessageFor(model => model.aircon)
             </div>
         </div>
@@ -76,7 +68,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.navigation, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.CheckBoxFor(model => model.navigation.Value)
+                @Html.CheckBoxFor(model => (Boolean)model.navigation)
                 @Html.ValidationMessageFor(model => model.navigation)
             </div>
         </div>
@@ -84,7 +76,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.transmission_type, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.CheckBoxFor(model => model.transmission_type.Value)
+                @Html.CheckBoxFor(model => (Boolean)model.transmission_type)
                 @Html.ValidationMessageFor(model => model.transmission_type)
             </div>
         </div>
@@ -111,7 +103,7 @@
                 @Html.EditorFor(model => model.parking_pos)
                 @Html.ValidationMessageFor(model => model.parking_pos)
             </div>
-        </div>
+        </div>        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

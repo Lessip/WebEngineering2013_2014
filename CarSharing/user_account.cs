@@ -12,9 +12,9 @@ namespace CarSharing
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class user_account
     {
-        public user()
+        public user_account()
         {
             this.contract = new HashSet<contract>();
             this.user_address = new HashSet<user_address>();

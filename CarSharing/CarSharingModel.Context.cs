@@ -28,7 +28,7 @@ namespace CarSharing
         public virtual DbSet<car> car { get; set; }
         public virtual DbSet<car_type> car_type { get; set; }
         public virtual DbSet<contract> contract { get; set; }
-        public virtual DbSet<user> user { get; set; }
+        public virtual DbSet<user_account> user { get; set; }
         public virtual DbSet<user_address> user_address { get; set; }
     }
 }

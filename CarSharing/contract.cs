@@ -25,6 +25,6 @@ namespace CarSharing
         public Nullable<decimal> price { get; set; }
     
         public virtual car car { get; set; }
-        public virtual user user { get; set; }
+        public virtual user_account user { get; set; }
     }
 }

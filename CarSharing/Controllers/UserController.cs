@@ -27,7 +27,7 @@ namespace CarSharing.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            user user = db.user.Find(id);
+            user_account user = db.user.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -46,7 +46,7 @@ namespace CarSharing.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="id,login_name,firstname,name,date_of_birth,identity_number,password,email,access_state")] user user)
+        public ActionResult Create([Bind(Include = "id,login_name,firstname,name,date_of_birth,identity_number,password,email,access_state")] user_account user)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace CarSharing.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            user user = db.user.Find(id);
+            user_account user = db.user.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace CarSharing.Controllers
         // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="id,login_name,firstname,name,date_of_birth,identity_number,password,email,access_state")] user user)
+        public ActionResult Edit([Bind(Include = "id,login_name,firstname,name,date_of_birth,identity_number,password,email,access_state")] user_account user)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace CarSharing.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            user user = db.user.Find(id);
+            user_account user = db.user.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -109,7 +109,7 @@ namespace CarSharing.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            user user = db.user.Find(id);
+            user_account user = db.user.Find(id);
             db.user.Remove(user);
             db.SaveChanges();
             return RedirectToAction("Index");

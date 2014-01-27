@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CarSharing.user>
+﻿@model List<CarSharing.Models.UserProfile>
 
 @{
     ViewBag.Title = "UserView";
@@ -28,7 +28,7 @@
            Date of birth
         </th>
         <th>
-            Driver´s licence
+            Ident string
         </th>        
         <th>
             Email
@@ -36,7 +36,15 @@
         <th>
             Access_state
         </th>
-        <th></th>
+        <th>
+            Street
+        </th>
+        <th>
+            Zip
+        </th>
+        <th>
+            City
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -67,7 +75,16 @@
                 @Html.DisplayFor(modelItem => item.access_state)
             </td>
             <td>
-                @Html.ActionLink("Edit", "UserEdit", new { id = item.id }) |
+                @Html.DisplayFor(modelItem => item.street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.post_code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "UserEdit", new CarSharing.Models.UserProfile{ id = item.id }) |
                 @Html.ActionLink("Details", "UserDetails", new { id = item.id }) |
                 @Html.ActionLink("Delete", "UserDelete", new { id = item.id })
             </td>

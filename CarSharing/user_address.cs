@@ -20,6 +20,6 @@ namespace CarSharing
         public string post_code { get; set; }
         public string city { get; set; }
     
-        public virtual user user { get; set; }
+        public virtual user_account user { get; set; }
     }
 }

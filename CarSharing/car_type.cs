@@ -21,7 +21,7 @@ namespace CarSharing
     
         public int id { get; set; }
         public string type { get; set; }
-        public Nullable<int> @class { get; set; }
+        public Nullable<int> car_class { get; set; }
         public Nullable<decimal> price { get; set; }
         public Nullable<int> seat_size { get; set; }
     
