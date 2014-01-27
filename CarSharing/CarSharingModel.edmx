@@ -12,22 +12,22 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="car_type_id" Type="int" Nullable="false" />
           <Property Name="state" Type="int" />
-          <Property Name="name" Type="text" />
-          <Property Name="registration_number" Type="text" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="registration_number" Type="nvarchar" MaxLength="50" />
           <Property Name="mileage" Type="int" />
           <Property Name="aircon" Type="bit" />
           <Property Name="navigation" Type="bit" />
           <Property Name="transmission_type" Type="bit" />
           <Property Name="power" Type="int" />
-          <Property Name="picture_link" Type="text" />
-          <Property Name="parking_pos" Type="text" />
+          <Property Name="picture_link" Type="nvarchar" MaxLength="50" />
+          <Property Name="parking_pos" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="car_type">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="type" Type="text" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" />
           <Property Name="seat_size" Type="int" />
           <Property Name="class" Type="int" />
           <Property Name="price" Type="money" />
@@ -41,8 +41,8 @@
           <Property Name="car_id" Type="int" Nullable="false" />
           <Property Name="pick_up_date" Type="datetime" Nullable="false" />
           <Property Name="return_date" Type="datetime" Nullable="false" />
-          <Property Name="start_location" Type="text" />
-          <Property Name="end_location" Type="text" />
+          <Property Name="start_location" Type="nvarchar(max)" />
+          <Property Name="end_location" Type="nvarchar(max)" />
           <Property Name="distance" Type="int" />
           <Property Name="price" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
@@ -51,14 +51,15 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="login_name" Type="text" Nullable="false" />
-          <Property Name="firstname" Type="text" Nullable="false" />
-          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="login_name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="date_of_birth" Type="date" Nullable="false" />
-          <Property Name="identity_number" Type="text" />
-          <Property Name="password" Type="text" Nullable="false" />
-          <Property Name="email" Type="text" Nullable="false" />
+          <Property Name="identity_number" Type="uniqueidentifier" />
+          <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="access_state" Type="int" />
+          <Property Name="timelimit" Type="datetime" />
         </EntityType>
         <EntityType Name="user_address">
           <Key>
@@ -66,9 +67,9 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="user_id" Type="int" Nullable="false" />
-          <Property Name="street" Type="text" Nullable="false" />
-          <Property Name="post_code" Type="text" Nullable="false" />
-          <Property Name="city" Type="text" Nullable="false" />
+          <Property Name="street" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="post_code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="city" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <Association Name="FK_car_contract">
           <End Role="car" Type="Self.car" Multiplicity="1" />
@@ -152,15 +153,15 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="car_type_id" Type="Int32" Nullable="false" />
           <Property Name="state" Type="Int32" />
-          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="registration_number" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="registration_number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="mileage" Type="Int32" />
           <Property Name="aircon" Type="Boolean" />
           <Property Name="navigation" Type="Boolean" />
           <Property Name="transmission_type" Type="Boolean" />
           <Property Name="power" Type="Int32" />
-          <Property Name="picture_link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="parking_pos" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="picture_link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="parking_pos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="contract" Relationship="Self.FK_car_contract" FromRole="car" ToRole="contract" />
           <NavigationProperty Name="car_type" Relationship="Self.FK_type_car" FromRole="car" ToRole="car_type" />
         </EntityType>
@@ -169,7 +170,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="type" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="car_class" Type="Int32" />
           <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="car" Relationship="Self.FK_type_car" FromRole="car_type" ToRole="car" />
@@ -184,8 +185,8 @@
           <Property Name="car_id" Type="Int32" Nullable="false" />
           <Property Name="pick_up_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="return_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="start_location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="end_location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="start_location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="end_location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="distance" Type="Int32" />
           <Property Name="price" Type="Decimal" Precision="18" Scale="2" />
           <NavigationProperty Name="car" Relationship="Self.FK_car_contract" FromRole="contract" ToRole="car" />
@@ -196,16 +197,17 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="login_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="firstname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="login_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="identity_number" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="identity_number" Type="Guid" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="access_state" Type="Int32" />
           <NavigationProperty Name="contract" Relationship="Self.FK_user_contract" FromRole="user" ToRole="contract" />
           <NavigationProperty Name="user_address" Relationship="Self.FK_user_address" FromRole="user" ToRole="user_address" />
+          <Property Name="timelimit" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="user_address">
           <Key>
@@ -213,9 +215,9 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
-          <Property Name="street" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="post_code" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="city" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="street" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="post_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="user" Relationship="Self.FK_user_address" FromRole="user_address" ToRole="user" />
         </EntityType>
         <Association Name="FK_car_contract">
@@ -342,6 +344,7 @@
           <EntitySetMapping Name="user">
             <EntityTypeMapping TypeName="CarSharingModel.user_account">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="timelimit" ColumnName="timelimit" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="login_name" ColumnName="login_name" />
                 <ScalarProperty Name="firstname" ColumnName="firstname" />

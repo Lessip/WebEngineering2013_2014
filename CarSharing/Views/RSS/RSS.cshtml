@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CarSharing.car>
+
+<?xml version="1.0" encoding="UTF-8" ?>
+
+@{
+    //var db = Database.Open("C:/Users/mash/Source/Repos/WebEngineering2013_2014/CarSharing/App_Data/aspnet-CarSharing-20131111131016.mdf");
+    ViewBag.Title = "RSS";
+    var db = Database.Open("CarSharingRSS");
+
+    var getCars = db.Query("select top(5) * from dbo.car");
+    var getTypes = db.Query("select top(5) * from dbo.car_type");
+    Response.ContentType = "text/xml+rss";
+    Layout = "";
+
+}
+
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/" xmlns:admin="http://webns.net/mvcb/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Cars Info</title>
+        @foreach (var item in getCars) {
+            @Html.Raw("<item>")@item
+            
+          
+            <title>@item.name</title>
+            @Html.Raw("<description>")@item.registration_number @Html.Raw("</description>")
+            
+            @Html.Raw("</item>")
+        }
+        @foreach (var item in getTypes)
+        {
+            @Html.Raw("<item>")@item
+
+
+            <title>@item.type</title>
+            @Html.Raw("<price>")@item.price @Html.Raw("</price>")
+
+            @Html.Raw("</item>")
+        }
+    </channel>
+</rss>

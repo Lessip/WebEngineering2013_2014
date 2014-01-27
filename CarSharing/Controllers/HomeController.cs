@@ -29,5 +29,10 @@ namespace CarSharing.Controllers
             return View();
         }
 
+        public ActionResult SelectLocation(string searchStr)
+        {
+            return View(searchStr);
+        }
+
     }
 }
