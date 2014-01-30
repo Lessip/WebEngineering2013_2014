@@ -26,15 +26,18 @@
         </th>
         <th>
            Date of birth
-        </th>
-        <th>
-            Ident string
-        </th>        
+        </th>                
         <th>
             Email
         </th>
         <th>
             Access_state
+        </th>
+        <th>
+            Ident string
+        </th>
+        <th>
+            Timelimit
         </th>
         <th>
             Street
@@ -64,15 +67,18 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.date_of_birth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.identity_number)
-            </td>            
+            </td>                        
             <td>
                 @Html.DisplayFor(modelItem => item.email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.access_state)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.identity_number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.timelimit)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.street)
