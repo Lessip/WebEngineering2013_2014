@@ -30,11 +30,12 @@ namespace CarSharing.Models
         public string login_name { get; set; }
         public String firstname { get; set; }
         public String name { get; set; }
-        public DateTime date_of_birth { get; set; }
-        public String identity_number { get; set; }
+        public DateTime date_of_birth { get; set; }        
         public String password { get; set; }
         public String email { get; set; }
         public int access_state { get; set; }
+        public Nullable<Guid> identity_number { get; set; }
+        public Nullable<DateTime> timelimit { get; set; }
         public String street { get; set; }
         public String post_code { get; set; }
         public String city { get; set; }
@@ -54,10 +55,11 @@ namespace CarSharing.Models
             firstname = new_user.firstname;
             name = new_user.name;
             date_of_birth = new_user.date_of_birth;
-            identity_number = new_user.identity_number.ToString();
             password = new_user.password;
             email = new_user.email;
             access_state = (int)new_user.access_state;
+            identity_number = (Guid)new_user.identity_number;
+            timelimit = (DateTime)new_user.timelimit;
             street = new_user_address.street;
             post_code = new_user_address.post_code;
             city = new_user_address.city;
