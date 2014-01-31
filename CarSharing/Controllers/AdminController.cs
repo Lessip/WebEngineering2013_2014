@@ -231,19 +231,6 @@ namespace CarSharing.Views
         {
             if (ModelState.IsValid)
             {
-                //car carID = new car();
-                //carID.car_type_id = car.car_type_id;
-                //carID.state = car.state;
-                //carID.name = car.name;
-                //carID.registration_number = car.registration_number;
-                //carID.mileage = car.mileage;
-                //carID.aircon = car.aircon;
-                //carID.navigation = car.navigation;
-                //carID.transmission_type = car.transmission_type;
-                //carID.power = car.power;
-                //carID.picture_link = car.picture_link;
-                //carID.parking_pos = car.parking_pos;
-
                 db.car.Add(car);
                 db.SaveChanges();
                 return RedirectToAction("CarView");
@@ -259,12 +246,34 @@ namespace CarSharing.Views
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            car car = db.car.Find(id);
+            var car =   from carId in db.car
+                        join carType in db.car_type
+                        on carId.car_type_id equals carType.id
+                        where carId.id == id 
+                        select new CarSharing.Models.CarProfile
+                        {
+                            id = carId.id,
+                            car_type_id = carId.car_type_id,
+                            state = (int)carId.state,
+                            name = carId.name,
+                            registration_number = carId.registration_number,
+                            mileage = (int)carId.mileage,
+                            aircon = (Boolean)carId.aircon,
+                            navigation = (Boolean)carId.navigation,
+                            transmission_type = (Boolean)carId.transmission_type,
+                            power = (int)carId.power,
+                            picture_link = carId.picture_link,
+                            parking_pos = carId.parking_pos,
+                            type = carType.type,
+                            seat_size = (int)carType.seat_size,
+                            car_class = (int)carType.car_class,
+                            price = (int)carType.price
+                        };
             if (car == null)
             {
                 return HttpNotFound();
             }
-            return View(car);
+            return View(car.Single());
         }
 
         // GET: /Admin/CarEdit/5

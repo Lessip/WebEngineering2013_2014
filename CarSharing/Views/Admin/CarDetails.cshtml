@@ -4,6 +4,27 @@
     ViewBag.Title = "CarDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+        function initialize()
+        {
+            var myLatlng = new google.maps.LatLng(@Html.DisplayFor(model => model.parking_pos));
+            var mapOptions = {
+                zoom: 14,
+                center: myLatlng
+            }
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: '@Html.DisplayFor(model => model.name)'
+            });
+        }
+
+                google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
 
 <h2>CarDetails</h2>
 
@@ -88,7 +109,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.picture_link)
+            <img src=@Html.DisplayFor(model => model.picture_link) alt=@Html.DisplayNameFor(model => model.name)>
         </dd>
 
         <dt>
@@ -96,6 +117,7 @@
         </dt>
 
         <dd>
+            <div id="map-canvas" style="height:300px; width:600px;"></div>
             @Html.DisplayFor(model => model.parking_pos)
         </dd>
         
