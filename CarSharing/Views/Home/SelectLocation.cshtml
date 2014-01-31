@@ -39,26 +39,72 @@
     <script>
         var geocoder;
         var map;
+
+        // array with car-information
+        var cars = [
+            @for (var i = 0; i < Model.Count(); i++ )
+            {
+                var item = Model.ElementAt(i);
+                if (item.parking_pos != null)
+                {
+                    @Html.Raw("            ['");
+                    @Html.Raw(item.name);
+                    @Html.Raw("', ");
+                    @Html.Raw(item.parking_pos);
+                    @Html.Raw(", ");
+                    @Html.Raw(i);
+                    if (i == (Model.Count()-1))
+                        { @Html.Raw("]\r\n"); }
+                    else
+                        { @Html.Raw("],\r\n"); }
+                }
+            }
+        ];
+
         function initialize() {
             geocoder = new google.maps.Geocoder();
-            var latlng = new google.maps.LatLng(50.838749, 12.928231);
+            var latlng = new google.maps.LatLng(51.000, 10.500);
             var mapOptions = {
-                zoom: 15,
+                zoom: 6,
                 center: latlng
             }
             map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+            setMarkers(map, cars);
+
+            @if (!String.IsNullOrEmpty(ViewBag.searchStr))
+            {
+                @Html.Raw("            codeAdress();\r\n");
+            }
+        }
+
+        function setMarkers(map, locations) {
+            for (var i = 0; i < locations.length; i++) {
+                var location = locations[i];
+                var myLatLng = new google.maps.LatLng(location[1], location[2]);
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    //icon: image,
+                    //shape: shape,
+                    title: location[0],
+                    zIndex: location[3]
+                });
+            }
         }
 
         function codeAddress() {
-
-            // clear Marks
+            var searchFlag = '../../Images/searchFlag.png';
             var address = document.getElementById('address').value;
             geocoder.geocode({ 'address': address }, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     map.setCenter(results[0].geometry.location);
+                    map.setZoom(12);
                     var marker = new google.maps.Marker({
                         map: map,
-                        position: results[0].geometry.location
+                        position: results[0].geometry.location,
+                        title: 'your Search',
+                        icon: searchFlag
                     });
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);
@@ -72,7 +118,7 @@
 </head>
 <body>
     <div>
-        <input id="address" type="textbox" value="Chemnitz">
+        <input id="address" type="textbox" value="@ViewBag.searchStr">
         <input type="button" value="Search" onclick="codeAddress()">
     </div>
     <div id="map-canvas"></div>
