@@ -98,9 +98,7 @@ namespace CarSharing.Controllers
         }
       
         public ActionResult ConfirmRegistration(user_account user)
-        {          
-               
-            // TO DO timestamp
+        {                     
             if ((user != null) && (user.timelimit >= System.DateTime.Now))
             {
                 return RedirectToAction("ConfirmationSuccess", new {  id= user.id, identity_number = user.identity_number });
