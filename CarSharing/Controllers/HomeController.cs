@@ -29,9 +29,19 @@ namespace CarSharing.Controllers
             return View();
         }
 
+        private CarSharingEntities db = new CarSharingEntities();
+
         public ActionResult SelectLocation(string searchStr)
         {
-            return View(searchStr);
+            if (!String.IsNullOrEmpty(searchStr))
+            {
+                ViewBag.searchStr = searchStr;
+            }
+            // Filter auf parking_pos != null
+            var cars = from m in db.car select m;
+            cars = cars.Where(item => item.parking_pos != null);
+
+            return View(cars);
         }
 
     }

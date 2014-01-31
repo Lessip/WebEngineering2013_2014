@@ -244,6 +244,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CarModel.cs" />
+    <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="user_account.cs">
@@ -341,6 +342,7 @@
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="Images\rss.png" />
     <Content Include="Images\car-icon.png" />
+    <Content Include="Images\searchFlag.png" />
     <Content Include="Scripts\jquery-2.0.3.js" />
     <Content Include="Scripts\jquery-2.0.3.min.js" />
     <Content Include="Scripts\jquery-2.0.3.min.map" />

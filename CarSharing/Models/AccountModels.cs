@@ -54,7 +54,7 @@ namespace CarSharing.Models
             firstname = new_user.firstname;
             name = new_user.name;
             date_of_birth = new_user.date_of_birth;
-            identity_number = new_user.identity_number;
+            identity_number = new_user.identity_number.ToString();
             password = new_user.password;
             email = new_user.email;
             access_state = (int)new_user.access_state;
