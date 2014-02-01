@@ -160,7 +160,7 @@
           <Property Name="navigation" Type="Boolean" />
           <Property Name="transmission_type" Type="Boolean" />
           <Property Name="power" Type="Int32" />
-          <Property Name="picture_link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="picture_link" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="parking_pos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="contract" Relationship="Self.FK_car_contract" FromRole="car" ToRole="contract" />
           <NavigationProperty Name="car_type" Relationship="Self.FK_type_car" FromRole="car" ToRole="car_type" />

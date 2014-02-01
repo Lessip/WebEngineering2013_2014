@@ -4,15 +4,34 @@
     ViewBag.Title = "CarDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+        function initialize()
+        {
+            var myLatlng = new google.maps.LatLng(@Html.DisplayFor(model => model.parking_pos));
+            var mapOptions = {
+                zoom: 14,
+                center: myLatlng
+            }
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: '@Html.DisplayFor(model => model.name)'
+            });
+        }
+
+                google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
 
 <h2>CarDetails</h2>
 
 <div>
-    <h4>car</h4>
-	<hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.id)
+            ID
         </dt>
 
         <dd>
@@ -20,7 +39,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.state)
+           State
         </dt>
 
         <dd>
@@ -28,7 +47,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            Name
         </dt>
 
         <dd>
@@ -36,7 +55,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.registration_number)
+            Registration Number
         </dt>
 
         <dd>
@@ -44,7 +63,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.mileage)
+            Mileage
         </dt>
 
         <dd>
@@ -52,7 +71,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.aircon)
+            Aircondition
         </dt>
 
         <dd>
@@ -60,7 +79,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.navigation)
+            Navigation
         </dt>
 
         <dd>
@@ -68,7 +87,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.transmission_type)
+            Automatic Transmission
         </dt>
 
         <dd>
@@ -76,7 +95,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.power)
+            Power [HP]
         </dt>
 
         <dd>
@@ -84,23 +103,24 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.picture_link)
+            Picture
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.picture_link)
+            <img src=@Html.DisplayFor(model => model.picture_link) alt=@Html.DisplayNameFor(model => model.name)>
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.parking_pos)
+            Parking Position
         </dt>
 
         <dd>
+            <div id="map-canvas" style="height:300px; width:600px;"></div>
             @Html.DisplayFor(model => model.parking_pos)
         </dd>
         
         <dt>
-            @Html.DisplayNameFor(model => model.type)
+            Type
         </dt>
 
         <dd>
@@ -108,7 +128,7 @@
         </dd>
         
         <dt>
-            @Html.DisplayNameFor(model => model.seat_size)
+            Number of seats
         </dt>
 
         <dd>
@@ -116,7 +136,7 @@
         </dd>
         
         <dt>
-            @Html.DisplayNameFor(model => model.car_class)
+            Class
         </dt>
 
         <dd>
@@ -124,7 +144,7 @@
         </dd>
         
         <dt>
-            @Html.DisplayNameFor(model => model.price)
+            Price
         </dt>
 
         <dd>
@@ -133,6 +153,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Edit", "CarEdit", new { id = Model.id }) |
     @Html.ActionLink("Back to List", "CarView")
 </p>

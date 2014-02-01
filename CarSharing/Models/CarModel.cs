@@ -33,10 +33,10 @@ namespace CarSharing.Models
         public int power { get; set; }
         public String picture_link { get; set; }
         public String parking_pos { get; set; }
-        public int type { get; set; }
-        public int seat_size { get; set; }
-        public int car_class { get; set; }
-        public int price { get; set; }
+        public String type { get; set; }
+        public Nullable<int> seat_size { get; set; }
+        public Nullable<int> car_class { get; set; }
+        public Nullable<int> price { get; set; }
 
         // Constructors for new userprofiles
         // Standard contrustor
@@ -59,6 +59,7 @@ namespace CarSharing.Models
             power = (int)new_car.power;
             picture_link = new_car.picture_link;
             parking_pos = new_car.parking_pos;
+            type = new_car_type.type;
             seat_size = (int)new_car_type.seat_size;
             car_class = (int)new_car_type.car_class;
             price = (int)new_car_type.price;
