@@ -7,17 +7,15 @@
 
 <h2>CarCreate</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>car</h4>
-        <hr />
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.car_type_id, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.car_type_id, "Type ID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.DropDownList("car_type_id", String.Empty)*@
                 @Html.EditorFor(model => model.car_type_id)
@@ -26,7 +24,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.state, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.state, "State", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.DropDownList("state", String.Empty)*@
                 @Html.EditorFor(model => model.state)
@@ -35,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.name, "Model", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.name)
                 @Html.ValidationMessageFor(model => model.name)
@@ -43,7 +41,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.registration_number, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.registration_number, "License number", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.registration_number)
                 @Html.ValidationMessageFor(model => model.registration_number)
@@ -51,7 +49,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.mileage, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.mileage, "Mileage", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.mileage)
                 @Html.ValidationMessageFor(model => model.mileage)
@@ -59,7 +57,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.aircon, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.aircon, "Aircondition", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.CheckBoxFor(model => (bool)model.aircon)*@
                 @Html.EditorFor(model => model.aircon)
@@ -68,7 +66,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.navigation, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.navigation, "Navigation", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.CheckBoxFor(model => (bool)model.navigation)*@
                 @Html.EditorFor(model => model.navigation)
@@ -77,7 +75,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.transmission_type, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.transmission_type, "Automatic transmission", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.CheckBoxFor(model => (bool)model.transmission_type)*@
                 @Html.EditorFor(model => model.transmission_type)
@@ -86,7 +84,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.power, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.power, "Power", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.power)
                 @Html.ValidationMessageFor(model => model.power)
@@ -94,7 +92,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.picture_link, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.picture_link, "Image", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.picture_link)
                 @Html.ValidationMessageFor(model => model.picture_link)
@@ -102,7 +100,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.parking_pos, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.parking_pos, "Position", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.parking_pos)
                 @Html.ValidationMessageFor(model => model.parking_pos)
@@ -111,7 +109,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="CarCreate" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
