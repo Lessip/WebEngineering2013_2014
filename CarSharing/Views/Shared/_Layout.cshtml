@@ -14,8 +14,7 @@
             <section id="login">
                 @Html.ActionLink("Registrate", "Registrate", "Registration")
             </section>
-        </div>
-        <button id="rss" onclick="rss()"/>
+        </div>        
         <script type="text/javascript">
             function rss() {
                 window.open('@Url.Action("RSS", "RSS")');    
@@ -60,6 +59,7 @@
                 <li>@Html.ActionLink("Cars", "CarView", "Admin")</li>
             </ul>
         </div>
+        <button id="rss" onclick="rss()" />
     </div>
 
     <div class="container body-content">

@@ -118,8 +118,11 @@
 </head>
 <body>
     <div>
-        <input id="address" type="textbox" value="@ViewBag.searchStr">
-        <input type="button" value="Search" onclick="codeAddress()">
+        @using (Html.BeginForm())
+        {
+            @Html.TextBox("address")
+            <input type="button" value="Search" onclick="codeAddress()">            
+        }
     </div>
     <div id="map-canvas"></div>
 </body>

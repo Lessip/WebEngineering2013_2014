@@ -11,56 +11,36 @@
     <title>Search Page</title>
 </head>
 <body>
-    <h1>Search Page.</h1>
-    <div id="search_form">
-        <p class="name">Country</p>
-        <select class="drop_down">
-            <option value="">Germany</option>
-            <option value="">Ukraine</option>
-            <option value="">India</option>
-            <option value="">USA</option>
-        </select>
-
-        <p class="name">City</p>
-        <select class="drop_down">
-            <option value="">Chemnitz</option>
-            <option value="">Kiev</option>
-            <option value="">Deli</option>
-            <option value="">New York</option>
-        </select>
-
-        <p class="name">Location</p>
-        <select class="drop_down">
-            <option value="">????</option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-        </select>
-
-        <input class="" value="Start parking position"></input>
-        <button class="google_maps">Google Map</button>
-        <input class="" value="End parking position"></input>
-        <button class="google_maps">Google Map</button>
-
-        <input class="" value="Pick Up date"></input>
-        <button class="calender">Calender</button>
-        <input class="" value="Drop Off date"></input>
-        <button class="calender">Calender</button>
-        <input class="" value="Time"></input>
-        <button class="calender">Time</button>
-        <input class="" value="Time"></input>
-        <button class="calender">Time</button>
-
-        <p class="name">Car</p>
-        <select class="drop_down"></select>
-        <p class="name">Number of seats</p>
-        <select class="drop_down"></select>
-        <p class="name">Class</p>
-        <select class="drop_down"></select>
-        <p class="name">Price</p>
-        <select class="drop_down"></select>
-
-        <button class="search_button">Search</button>        
+    <h2>Search Page</h2>
+    <div class="form">
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="searchSection">
+                    Pickup
+                    @{var pickupDateTime = DateTime.Today.AddDays(2.5);}
+                    <div class="row">
+                        <div class="cell"><input type="text" id="pickupLocation" name="pickupLocation" value="return location" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell"><input type="date" id="pickupDate" name="pickupDate" value="@pickupDateTime.ToString("yyyy-MM-dd")" /></div>
+                        <div class="cell"><input type="time" id="pickupTime" name="pickupTime" value="@pickupDateTime.ToString("HH:mm")" /></div>
+                    </div>
+                </div>
+                <div class="searchSection">
+                    Return
+                    @{var returnDateTime = pickupDateTime.AddDays(1.25);}
+                    <div class="row">
+                        <div class="cell"><input type="text" id="returnLocation" name="returnLocation" value="return location"/></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell"><input type="date" id="returnDate" name="returnDate" value="@returnDateTime.ToString("yyyy-MM-dd")" /></div>
+                        <div class="cell"><input type="time" id="returnTime" name="returnTime" value="@returnDateTime.ToString("HH:mm")" /></div>
+                    </div>
+                </div>
+            </div>
+            <input type="submit" value="Search" />
+        }
     </div>
 </body>
 </html>
