@@ -29,11 +29,9 @@
 <h2>CarDetails</h2>
 
 <div>
-    <h4>car</h4>
-	<hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.id)
+            ID
         </dt>
 
         <dd>
@@ -41,7 +39,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.state)
+           State
         </dt>
 
         <dd>
@@ -49,7 +47,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            Name
         </dt>
 
         <dd>
@@ -57,7 +55,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.registration_number)
+            Registration Number
         </dt>
 
         <dd>
@@ -65,7 +63,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.mileage)
+            Mileage
         </dt>
 
         <dd>
@@ -73,7 +71,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.aircon)
+            Aircondition
         </dt>
 
         <dd>
@@ -81,7 +79,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.navigation)
+            Navigation
         </dt>
 
         <dd>
@@ -89,7 +87,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.transmission_type)
+            Automatic Transmission
         </dt>
 
         <dd>
@@ -97,7 +95,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.power)
+            Power [HP]
         </dt>
 
         <dd>
@@ -105,7 +103,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.picture_link)
+            Picture
         </dt>
 
         <dd>
@@ -113,7 +111,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.parking_pos)
+            Parking Position
         </dt>
 
         <dd>
@@ -122,7 +120,7 @@
         </dd>
         
         <dt>
-            @Html.DisplayNameFor(model => model.type)
+            Type
         </dt>
 
         <dd>
@@ -130,7 +128,7 @@
         </dd>
         
         <dt>
-            @Html.DisplayNameFor(model => model.seat_size)
+            Number of seats
         </dt>
 
         <dd>
@@ -138,7 +136,7 @@
         </dd>
         
         <dt>
-            @Html.DisplayNameFor(model => model.car_class)
+            Class
         </dt>
 
         <dd>
@@ -146,7 +144,7 @@
         </dd>
         
         <dt>
-            @Html.DisplayNameFor(model => model.price)
+            Price
         </dt>
 
         <dd>
@@ -155,6 +153,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Edit", "CarEdit", new { id = Model.id }) |
     @Html.ActionLink("Back to List", "CarView")
 </p>

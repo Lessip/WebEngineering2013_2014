@@ -247,7 +247,6 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CarModel.cs" />
-    <Compile Include="Models\SearchModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="user_account.cs">
