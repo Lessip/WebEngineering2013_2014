@@ -21,21 +21,37 @@ namespace CarSharing.Models
     public class CarProfile
     {
         [Key]
+        [Display(Name = "ID")]
         public int id { get; set; }
+        [Display(Name = "Type ID")]
         public int car_type_id { get; set; }
+        [Display(Name = "State")]
         public int state { get; set; }
+        [Display(Name = "Model")]
         public String name { get; set; }
+        [Display(Name = "License number")]
         public String registration_number { get; set; }
+        [Display(Name = "Mileage")]
         public int mileage { get; set; }
+        [Display(Name = "Aircondition")]
         public Boolean aircon { get; set; }
+        [Display(Name = "Navigation")]
         public Boolean navigation { get; set; }
+        [Display(Name = "Automatic transmission")]
         public Boolean transmission_type { get; set; }
+        [Display(Name = "Power")]
         public int power { get; set; }
+        [Display(Name = "Image")]
         public String picture_link { get; set; }
+        [Display(Name = "Position")]
         public String parking_pos { get; set; }
+        [Display(Name = "Type")]
         public String type { get; set; }
+        [Display(Name = "Seats")]
         public Nullable<int> seat_size { get; set; }
+        [Display(Name = "Class")]
         public Nullable<int> car_class { get; set; }
+        [Display(Name = "Price")]
         public Nullable<int> price { get; set; }
 
         // Constructors for new userprofiles

@@ -11,7 +11,7 @@
 <div>
     <dl class="dl-horizontal">
         <dt>
-            ID
+            @Html.DisplayNameFor(model => model.id)
         </dt>
 
         <dd>
@@ -19,7 +19,7 @@
         </dd>
 
         <dt>
-            State
+            @Html.DisplayNameFor(model => model.state)
         </dt>
 
         <dd>
@@ -27,7 +27,7 @@
         </dd>
 
         <dt>
-            Name
+            @Html.DisplayNameFor(model => model.name)
         </dt>
 
         <dd>
@@ -35,7 +35,7 @@
         </dd>
 
         <dt>
-            Registration Number
+            @Html.DisplayNameFor(model => model.registration_number)
         </dt>
 
         <dd>
@@ -43,7 +43,7 @@
         </dd>
 
         <dt>
-            Mileage
+            @Html.DisplayNameFor(model => model.mileage)
         </dt>
 
         <dd>
@@ -51,7 +51,7 @@
         </dd>
 
         <dt>
-            Aircondition
+            @Html.DisplayNameFor(model => model.aircon)
         </dt>
 
         <dd>
@@ -59,7 +59,7 @@
         </dd>
 
         <dt>
-            Navigation
+            @Html.DisplayNameFor(model => model.navigation)
         </dt>
 
         <dd>
@@ -67,7 +67,7 @@
         </dd>
 
         <dt>
-            Automatic Transmission
+            @Html.DisplayNameFor(model => model.transmission_type)
         </dt>
 
         <dd>
@@ -75,7 +75,7 @@
         </dd>
 
         <dt>
-            Power [HP]
+            @Html.DisplayNameFor(model => model.power)
         </dt>
 
         <dd>
@@ -83,7 +83,7 @@
         </dd>
 
         <dt>
-            Picture
+            @Html.DisplayNameFor(model => model.picture_link)
         </dt>
 
         <dd>
@@ -91,7 +91,7 @@
         </dd>
 
         <dt>
-            Parking Position
+            @Html.DisplayNameFor(model => model.parking_pos)
         </dt>
 
         <dd>
@@ -99,7 +99,7 @@
         </dd>
 
         <dt>
-            Type
+            @Html.DisplayNameFor(model => model.type)
         </dt>
 
         <dd>
@@ -107,7 +107,7 @@
         </dd>
 
         <dt>
-            Number of seats
+            @Html.DisplayNameFor(model => model.seat_size)
         </dt>
 
         <dd>
@@ -115,7 +115,7 @@
         </dd>
 
         <dt>
-            Class
+            @Html.DisplayNameFor(model => model.car_class)
         </dt>
 
         <dd>
@@ -123,7 +123,7 @@
         </dd>
 
         <dt>
-            Price
+            @Html.DisplayNameFor(model => model.price)
         </dt>
 
         <dd>
@@ -131,11 +131,12 @@
         </dd>
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="CarDelete" class="btn btn-default" /> |
+            <input type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "CarView")
         </div>
     }

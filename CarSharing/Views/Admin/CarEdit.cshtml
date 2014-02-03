@@ -10,13 +10,13 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         @Html.ValidationSummary(true)
         @*@Html.HiddenFor(model => model.id)*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.id, "Car ID", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.id, "ID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.id)
                 @Html.ValidationMessageFor(model => model.id)
@@ -32,7 +32,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.car_type_id, "Type", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.car_type_id, "Type ID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.car_type_id)
                 @Html.ValidationMessageFor(model => model.car_type_id)
@@ -40,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.name, "Name",  new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.name, "Model", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.name)
                 @Html.ValidationMessageFor(model => model.name)
@@ -48,7 +48,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.registration_number, "Registration number", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.registration_number, "License number", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.registration_number)
                 @Html.ValidationMessageFor(model => model.registration_number)
@@ -82,7 +82,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.transmission_type, "Transmission", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.transmission_type, "Automatic transmission", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @*@Html.CheckBoxFor(model => (Boolean)model.transmission_type)*@
                 @Html.EditorFor(model => model.transmission_type)
@@ -99,7 +99,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.picture_link, "Image link", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.picture_link, "Image", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.picture_link)
                 @Html.ValidationMessageFor(model => model.picture_link)
@@ -112,11 +112,11 @@
                 @Html.EditorFor(model => model.parking_pos)
                 @Html.ValidationMessageFor(model => model.parking_pos)
             </div>
-        </div>        
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="CarEdit" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
