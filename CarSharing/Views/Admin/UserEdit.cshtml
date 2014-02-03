@@ -10,10 +10,8 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>user</h4>
-        <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.id)
 
@@ -54,6 +52,14 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.identity_number)
                 @Html.ValidationMessageFor(model => model.identity_number)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.timelimit, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.timelimit)
+                @Html.ValidationMessageFor(model => model.timelimit)
             </div>
         </div>
 

@@ -245,14 +245,13 @@ a:hover {
 border-bottom:1px solid #999;
 }
 
-
-
 search_button{
 
 }
 
-#search_form{
-
+.form{
+    display: table;
+    width:100%;
 }
 
 .name{
@@ -285,9 +284,42 @@ thead td {
     text-align:center;
 }
 
+.row {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    float: left;
+    margin: 5px;
+}
+
 #rss{
      background-image:url(../Images/rss.png); 
      height: 32px;
      width: 32px;
-     margin-left: 1200px;
+     float: right;
+}
+
+.searchSection  {
+    display: block;
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    height: auto;
+    width: auto;
+    text-align: center;
+    float: left;
+}
+
+#map-canvas {
+    height: 480px;
+    width: 480px;
+    float: left;
+}
+
+.result {
+    background-color: #ffbb00;
+    border-radius: 5px;
 }

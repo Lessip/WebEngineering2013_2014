@@ -1,4 +1,4 @@
-﻿@model List<CarSharing.Models.CarProfile>
+﻿@model CarSharing.Models.WrapCarTables
 
 @{
     ViewBag.Title = "CarView";
@@ -8,7 +8,7 @@
 <h2>CarView</h2>
 
 <p>
-    @Html.ActionLink("Create New", "CarCreate")
+    @Html.ActionLink("Create New Car", "CarCreate")
 </p>
 <table class="table">
     <tr>
@@ -55,11 +55,12 @@
             Class
         </th>
         <th>
+            @*@Html.DisplayNameFor(model => model.id)*@
             Price
         </th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (CarSharing.Models.CarProfile item in ViewData.Model.carTable)
     {
         <tr>
             <td>
@@ -111,6 +112,52 @@
                 @Html.ActionLink("Edit", "CarEdit", new { id = item.id }) |
                 @Html.ActionLink("Details", "CarDetails", new { id = item.id }) |
                 @Html.ActionLink("Delete", "CarDelete", new { id = item.id })
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Create New Type", "CarTypeCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Seats
+        </th>
+        <th>
+            Class
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
+    @foreach (CarSharing.car_type typeItem in ViewData.Model.carTypeTable)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(wrapperItem => typeItem.id)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => typeItem.type)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => typeItem.seat_size)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => typeItem.car_class)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => typeItem.price)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "CarTypeEdit", new { id = typeItem.id }) |
+                @Html.ActionLink("Delete", "CarTypeDelete", new { id = typeItem.id })
             </td>
         </tr>
     }

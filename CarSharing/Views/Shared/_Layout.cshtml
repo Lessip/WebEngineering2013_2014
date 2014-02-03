@@ -14,41 +14,17 @@
             <section id="login">
                 @Html.ActionLink("Registrate", "Registrate", "Registration")
             </section>
-        </div>
-        <button id="rss" onclick="rss()"/>
+        </div>        
         <script type="text/javascript">
             function rss() {
                 window.open('@Url.Action("RSS", "RSS")');    
             }
         </script>
     </header>
-
-    <!--
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </div>
-    -->
-
     <div id="container">
         <div id="navMain" class="nav">
             <ul id="menu">
                 <li>@Html.ActionLink("Search Page", "Index", "Home")</li>
-                @*<li>@Html.ActionLink("link", "About" , "Home" )</li>
-                <li>@Html.ActionLink("link", "Contact" , "Home" )</li>
-                <li>@Html.ActionLink("LINK", "Index", "Home")</li>*@
                 <li>@Html.ActionLink("TEAM 8", "About", "Home")</li>
                 <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
                 <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
@@ -60,6 +36,7 @@
                 <li>@Html.ActionLink("Cars", "CarView", "Admin")</li>
             </ul>
         </div>
+        <button id="rss" onclick="rss()" />
     </div>
 
     <div class="container body-content">
@@ -70,7 +47,6 @@
         </footer>
     </div>
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>

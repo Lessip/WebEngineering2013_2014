@@ -7,7 +7,7 @@
       <Diagram DiagramId="d2d1b05e58cf4348a72627303ab2082f" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="CarSharingModel.car" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="CarSharingModel.car_type" Width="1.5" PointX="0.625" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CarSharingModel.contract" Width="1.5" PointX="5.5" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarSharingModel.contract" Width="1.5" PointX="5.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CarSharingModel.user_account" Width="1.5" PointX="0.625" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CarSharingModel.user_address" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="CarSharingModel.FK_car_contract" ManuallyRouted="false" />

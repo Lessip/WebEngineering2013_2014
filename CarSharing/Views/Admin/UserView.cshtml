@@ -22,11 +22,11 @@
             Firstname
         </th>
         <th>
-           Family name
+            Family name
         </th>
         <th>
-           Date of birth
-        </th>                
+            Date of birth
+        </th>
         <th>
             Email
         </th>
@@ -67,7 +67,7 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.date_of_birth)
-            </td>                        
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.email)
             </td>
@@ -90,7 +90,7 @@
                 @Html.DisplayFor(modelItem => item.city)
             </td>
             <td>
-                @Html.ActionLink("Edit", "UserEdit", new CarSharing.Models.UserProfile{ id = item.id }) |
+                @Html.ActionLink("Edit", "UserEdit", new { id = item.id }) |
                 @Html.ActionLink("Details", "UserDetails", new { id = item.id }) |
                 @Html.ActionLink("Delete", "UserDelete", new { id = item.id })
             </td>

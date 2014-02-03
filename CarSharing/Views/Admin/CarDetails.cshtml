@@ -4,12 +4,31 @@
     ViewBag.Title = "CarDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+        function initialize()
+        {
+            var myLatlng = new google.maps.LatLng(@Html.DisplayFor(model => model.parking_pos));
+            var mapOptions = {
+                zoom: 14,
+                center: myLatlng
+            }
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: '@Html.DisplayFor(model => model.name)'
+            });
+        }
+
+                google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
 
 <h2>CarDetails</h2>
 
 <div>
-    <h4>car</h4>
-	<hr />
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.id)
@@ -88,7 +107,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.picture_link)
+            <img src=@Html.DisplayFor(model => model.picture_link) alt=@Html.DisplayNameFor(model => model.name)>
         </dd>
 
         <dt>
@@ -96,9 +115,10 @@
         </dt>
 
         <dd>
+            <div id="map-canvas" style="height:300px; width:600px;"></div>
             @Html.DisplayFor(model => model.parking_pos)
         </dd>
-        
+
         <dt>
             @Html.DisplayNameFor(model => model.type)
         </dt>
@@ -106,7 +126,7 @@
         <dd>
             @Html.DisplayFor(model => model.type)
         </dd>
-        
+
         <dt>
             @Html.DisplayNameFor(model => model.seat_size)
         </dt>
@@ -114,7 +134,7 @@
         <dd>
             @Html.DisplayFor(model => model.seat_size)
         </dd>
-        
+
         <dt>
             @Html.DisplayNameFor(model => model.car_class)
         </dt>
@@ -122,17 +142,17 @@
         <dd>
             @Html.DisplayFor(model => model.car_class)
         </dd>
-        
+
         <dt>
             @Html.DisplayNameFor(model => model.price)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.price)
-        </dd>        
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Edit", "CarEdit", new { id = Model.id }) |
     @Html.ActionLink("Back to List", "CarView")
 </p>

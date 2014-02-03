@@ -22,7 +22,7 @@ namespace CarSharing.Views
         {
             return View();
         }
-        
+
         /*
          * The USER-section
          * 
@@ -33,30 +33,30 @@ namespace CarSharing.Views
         // Show the content of the user-table
         public ActionResult UserView()
         {
-           // Simply join the table user_address (from the right) to the table user
-           var queryResult = from userId in db.user
-                             join userAddress in db.user_address 
-                             on userId.id equals userAddress.user_id
-                             select new CarSharing.Models.UserProfile
-           { 
-                id = userId.id,
-                login_name = userId.login_name,
-                firstname = userId.firstname,
-                name = userId.name,
-                date_of_birth = userId.date_of_birth,
-                password = userId.password,
-                email = userId.email,
-                access_state = (int)userId.access_state,
-                identity_number = (Guid)userId.identity_number,
-                timelimit = (DateTime)userId.timelimit,
-                street = userAddress.street,
-                post_code = userAddress.post_code,
-                city = userAddress.city
-            };
+            // Simply join the table user_address (from the right) to the table user
+            var queryResult = from userId in db.user
+                              join userAddress in db.user_address
+                              on userId.id equals userAddress.user_id
+                              select new CarSharing.Models.UserProfile
+                              {
+                                  id = userId.id,
+                                  login_name = userId.login_name,
+                                  firstname = userId.firstname,
+                                  name = userId.name,
+                                  date_of_birth = userId.date_of_birth,
+                                  password = userId.password,
+                                  email = userId.email,
+                                  access_state = (int)userId.access_state,
+                                  identity_number = (Guid)userId.identity_number,
+                                  timelimit = (DateTime)userId.timelimit,
+                                  street = userAddress.street,
+                                  post_code = userAddress.post_code,
+                                  city = userAddress.city
+                              };
 
             return View(queryResult.ToList());
         }
-        
+
         // GET: /Admin/UserCreate
         public ActionResult UserCreate()
         {
@@ -94,19 +94,41 @@ namespace CarSharing.Views
             return View(user);
         }
 
-        // GET: /Admin/UserEdit/5
+        // GET: /Admin/UserDetails/5
         public ActionResult UserDetails(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            user_account user = db.user.Find(id);
-            if (user == null)
+
+            // Simply join the table user_address (from the right) to the table user
+            var userDetail = from userId in db.user
+                             join userAddress in db.user_address
+                             on userId.id equals userAddress.user_id
+                             where userId.id == id
+                             select new CarSharing.Models.UserProfile
+                             {
+                                 id = userId.id,
+                                 login_name = userId.login_name,
+                                 firstname = userId.firstname,
+                                 name = userId.name,
+                                 date_of_birth = userId.date_of_birth,
+                                 password = userId.password,
+                                 email = userId.email,
+                                 access_state = (int)userId.access_state,
+                                 identity_number = (Guid)userId.identity_number,
+                                 timelimit = (DateTime)userId.timelimit,
+                                 street = userAddress.street,
+                                 post_code = userAddress.post_code,
+                                 city = userAddress.city
+                             };
+
+            if (userDetail == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(userDetail.Single());
         }
 
         // GET: /Admin/UserEdit/5
@@ -116,12 +138,32 @@ namespace CarSharing.Views
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            user_account user = db.user.Find(id);
-            if (user == null)
+            // Simply join the table user_address (from the right) to the table user
+            var userDetail = from userId in db.user
+                             join userAddress in db.user_address
+                             on userId.id equals userAddress.user_id
+                             where userId.id == id
+                             select new CarSharing.Models.UserProfile
+                             {
+                                 id = userId.id,
+                                 login_name = userId.login_name,
+                                 firstname = userId.firstname,
+                                 name = userId.name,
+                                 date_of_birth = userId.date_of_birth,
+                                 password = userId.password,
+                                 email = userId.email,
+                                 access_state = (int)userId.access_state,
+                                 identity_number = (Guid)userId.identity_number,
+                                 timelimit = (DateTime)userId.timelimit,
+                                 street = userAddress.street,
+                                 post_code = userAddress.post_code,
+                                 city = userAddress.city
+                             };
+            if (userDetail == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(userDetail.Single());
         }
 
         // POST: /Admin/UserEdit/5
@@ -133,20 +175,24 @@ namespace CarSharing.Views
         {
             if (ModelState.IsValid)
             {
-                //user_account userAccount = new user_account();
-                //userAccount.login_name = user.login_name;
-                //userAccount.password = user.password;
-                //userAccount.firstname = user.firstname;
-                //userAccount.name = user.name;
-                //userAccount.date_of_birth = user.date_of_birth;
-                //userAccount.email = user.email;
-                //userAccount.access_state = user.access_state;
-                //user_address userAddress = new user_address();
-                //userAddress.street = user.street;
-                //userAddress.post_code = user.post_code;
-                //userAddress.city = user.city;
+                user_account userAccount = db.user.Find(user.id);
+                userAccount.login_name = user.login_name;
+                userAccount.password = user.password;
+                userAccount.firstname = user.firstname;
+                userAccount.name = user.name;
+                userAccount.date_of_birth = user.date_of_birth;
+                userAccount.email = user.email;
+                userAccount.access_state = user.access_state;
 
-                db.Entry(user).State = EntityState.Modified;
+                // get the id of the user_address-entry
+                var addressID = from entry in db.user_address where entry.user_id == user.id select entry.id;
+                user_address userAddress = db.user_address.Find(addressID.Single());
+                userAddress.street = user.street;
+                userAddress.post_code = user.post_code;
+                userAddress.city = user.city;
+
+                db.Entry(userAccount).State = EntityState.Modified;
+                db.Entry(userAddress).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("UserView");
             }
@@ -160,12 +206,32 @@ namespace CarSharing.Views
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            user_account user = db.user.Find(id);
-            if (user == null)
+            // Simply join the table user_address (from the right) to the table user
+            var userDetail = from userId in db.user
+                             join userAddress in db.user_address
+                             on userId.id equals userAddress.user_id
+                             where userId.id == id
+                             select new CarSharing.Models.UserProfile
+                             {
+                                 id = userId.id,
+                                 login_name = userId.login_name,
+                                 firstname = userId.firstname,
+                                 name = userId.name,
+                                 date_of_birth = userId.date_of_birth,
+                                 password = userId.password,
+                                 email = userId.email,
+                                 access_state = (int)userId.access_state,
+                                 identity_number = (Guid)userId.identity_number,
+                                 timelimit = (DateTime)userId.timelimit,
+                                 street = userAddress.street,
+                                 post_code = userAddress.post_code,
+                                 city = userAddress.city
+                             };
+            if (userDetail == null)
             {
                 return HttpNotFound();
             }
-            return View(user);
+            return View(userDetail.Single());
         }
 
         // POST: /Admin/UserDelete/5
@@ -173,10 +239,12 @@ namespace CarSharing.Views
         [ValidateAntiForgeryToken]
         public ActionResult UserDeleteConfirmed(int id)
         {
-            user_account user = db.user.Find(id);
-            db.user.Remove(user);
+            user_account userAccount = db.user.Find(id);
+            db.user.Remove(userAccount);
+            user_address userAddress = db.user_address.Find(id);
+            db.user_address.Remove(userAddress);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("UserView");
         }
 
         /*
@@ -190,7 +258,7 @@ namespace CarSharing.Views
         public ActionResult CarView()
         {
             // Simply join the table user_address (from the right) to the table user
-            var queryResult = from carId in db.car
+            var carListQueryResult = from carId in db.car
                               join carType in db.car_type
                               on carId.car_type_id equals carType.id
                               select new CarSharing.Models.CarProfile
@@ -212,7 +280,9 @@ namespace CarSharing.Views
                                   price = (int)carType.price
                               };
 
-            return View(queryResult.ToList());
+            var carTablesWrapperModel = new CarSharing.Models.WrapCarTables(carListQueryResult.ToList(), db.car_type.ToList());
+
+            return View(carTablesWrapperModel);
         }
 
         // GET: /Admin/CarCreate
@@ -231,19 +301,6 @@ namespace CarSharing.Views
         {
             if (ModelState.IsValid)
             {
-                //car carID = new car();
-                //carID.car_type_id = car.car_type_id;
-                //carID.state = car.state;
-                //carID.name = car.name;
-                //carID.registration_number = car.registration_number;
-                //carID.mileage = car.mileage;
-                //carID.aircon = car.aircon;
-                //carID.navigation = car.navigation;
-                //carID.transmission_type = car.transmission_type;
-                //carID.power = car.power;
-                //carID.picture_link = car.picture_link;
-                //carID.parking_pos = car.parking_pos;
-
                 db.car.Add(car);
                 db.SaveChanges();
                 return RedirectToAction("CarView");
@@ -259,12 +316,34 @@ namespace CarSharing.Views
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            car car = db.car.Find(id);
+            var car = from carId in db.car
+                      join carType in db.car_type
+                      on carId.car_type_id equals carType.id
+                      where carId.id == id
+                      select new CarSharing.Models.CarProfile
+                      {
+                          id = carId.id,
+                          car_type_id = carId.car_type_id,
+                          state = (int)carId.state,
+                          name = carId.name,
+                          registration_number = carId.registration_number,
+                          mileage = (int)carId.mileage,
+                          aircon = (Boolean)carId.aircon,
+                          navigation = (Boolean)carId.navigation,
+                          transmission_type = (Boolean)carId.transmission_type,
+                          power = (int)carId.power,
+                          picture_link = carId.picture_link,
+                          parking_pos = carId.parking_pos,
+                          type = carType.type,
+                          seat_size = (int)carType.seat_size,
+                          car_class = (int)carType.car_class,
+                          price = (int)carType.price
+                      };
             if (car == null)
             {
                 return HttpNotFound();
             }
-            return View(car);
+            return View(car.Single());
         }
 
         // GET: /Admin/CarEdit/5
@@ -301,16 +380,49 @@ namespace CarSharing.Views
         // GET: /Admin/CarDelete/5
         public ActionResult CarDelete(int? id)
         {
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //car car = db.car.Find(id);
+            //if (car == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(car);
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            car car = db.car.Find(id);
+            var car = from carId in db.car
+                      join carType in db.car_type
+                      on carId.car_type_id equals carType.id
+                      where carId.id == id
+                      select new CarSharing.Models.CarProfile
+                      {
+                          id = carId.id,
+                          car_type_id = carId.car_type_id,
+                          state = (int)carId.state,
+                          name = carId.name,
+                          registration_number = carId.registration_number,
+                          mileage = (int)carId.mileage,
+                          aircon = (Boolean)carId.aircon,
+                          navigation = (Boolean)carId.navigation,
+                          transmission_type = (Boolean)carId.transmission_type,
+                          power = (int)carId.power,
+                          picture_link = carId.picture_link,
+                          parking_pos = carId.parking_pos,
+                          type = carType.type,
+                          seat_size = (int)carType.seat_size,
+                          car_class = (int)carType.car_class,
+                          price = (int)carType.price
+                      };
             if (car == null)
             {
                 return HttpNotFound();
             }
-            return View(car);
+            return View(car.Single());
         }
 
         // POST: /Admin/CarDelete/5
@@ -334,6 +446,92 @@ namespace CarSharing.Views
         public void getUserRights()
         {
             // read user rights from the database
+        }
+
+        /*
+         * The CAR TYPE-section
+         * 
+         * where all methods concerning the car-type-data are defined
+         */
+
+        // GET: /Admin/CarTypeCreate
+        public ActionResult CarTypeCreate()
+        {
+            return View();
+        }
+
+        // POST: /Admin/CarTypeCreate
+        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
+        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CarTypeCreate([Bind(Include = "type,seat_size,car_class,price")] car_type carType)
+        {
+            if (ModelState.IsValid)
+            {
+                db.car_type.Add(carType);
+                db.SaveChanges();
+                return RedirectToAction("CarView");
+            }
+
+            return View(carType);
+        }
+
+        // GET: /Admin/CarTypeEdit/5
+        public ActionResult CarTypeEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            car_type carType = db.car_type.Find(id);
+            if (carType == null)
+            {
+                return HttpNotFound();
+            }
+            return View(carType);
+        }
+
+        // POST: /Admin/CarTypeEdit/5
+        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
+        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CarTypeEdit([Bind(Include = "id,type,seat_size,car_class,price")] car_type carType)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(carType).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("CarView");
+            }
+            return View(carType);
+        }
+
+        // GET: /Admin/CarTypeDelete/5
+        public ActionResult CarTypeDelete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            car_type carType = db.car_type.Find(id);
+            if (carType == null)
+            {
+                return HttpNotFound();
+            }
+            return View(carType);
+        }
+
+        // POST: /Admin/CarTypeDelete/5
+        [HttpPost, ActionName("CarTypeDelete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CarTypeDeleteConfirmed(int id)
+        {
+            car_type carType = db.car_type.Find(id);
+            db.car_type.Remove(carType);
+            db.SaveChanges();
+            return RedirectToAction("CarView");
         }
     }
 }
