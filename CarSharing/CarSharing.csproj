@@ -388,16 +388,6 @@
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
-    <Content Include="Images\orderedList0.png" />
-    <Content Include="Images\orderedList1.png" />
-    <Content Include="Images\orderedList2.png" />
-    <Content Include="Images\orderedList3.png" />
-    <Content Include="Images\orderedList4.png" />
-    <Content Include="Images\orderedList5.png" />
-    <Content Include="Images\orderedList6.png" />
-    <Content Include="Images\orderedList7.png" />
-    <Content Include="Images\orderedList8.png" />
-    <Content Include="Images\orderedList9.png" />
     <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Contact.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
@@ -429,7 +419,7 @@
     <Content Include="Views\Admin\CarDelete.cshtml" />
     <Content Include="Views\Admin\CarDetails.cshtml" />
     <Content Include="Views\Admin\CarEdit.cshtml" />
-    <Content Include="Views\Home\SelectLocation.cshtml" />
+    <Content Include="Views\Home\SearchResult.cshtml" />
     <Content Include="Views\RSS\RSS.cshtml" />
     <Content Include="Views\Admin\CarTypeCreate.cshtml" />
     <Content Include="Views\Admin\CarTypeDelete.cshtml" />

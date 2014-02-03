@@ -245,8 +245,6 @@ a:hover {
 border-bottom:1px solid #999;
 }
 
-
-
 search_button{
 
 }
@@ -254,14 +252,6 @@ search_button{
 .form{
     display: table;
     width:100%;
-}
-
-.row {
-    display: table-row;
-}
-
-.cell {
-    display: table-cell;
 }
 
 .name{
@@ -294,6 +284,16 @@ thead td {
     text-align:center;
 }
 
+.row {
+    display: table-row;
+}
+
+.cell {
+    display: table-cell;
+    float: left;
+    margin: 5px;
+}
+
 #rss{
      background-image:url(../Images/rss.png); 
      height: 32px;
@@ -311,4 +311,15 @@ thead td {
     width: auto;
     text-align: center;
     float: left;
+}
+
+#map-canvas {
+    height: 480px;
+    width: 480px;
+    float: left;
+}
+
+.result {
+    background-color: #ffbb00;
+    border-radius: 5px;
 }

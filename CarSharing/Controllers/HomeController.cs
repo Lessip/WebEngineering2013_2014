@@ -31,11 +31,11 @@ namespace CarSharing.Controllers
 
         private CarSharingEntities db = new CarSharingEntities();
 
-        public ActionResult SelectLocation(string searchStr)
+        public ActionResult SearchResult(string pickupLocation, string pickupDate, string pickupTime, string returnLocation, string returnDate, string returnTime)
         {
-            if (!String.IsNullOrEmpty(searchStr))
+            if (!String.IsNullOrEmpty(pickupLocation))
             {
-                ViewBag.searchStr = searchStr;
+                ViewBag.searchStr = pickupLocation;
             }
             // Filter auf parking_pos != null
             var cars = from m in db.car select m;
