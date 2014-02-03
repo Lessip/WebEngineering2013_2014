@@ -258,7 +258,7 @@ namespace CarSharing.Views
         public ActionResult CarView()
         {
             // Simply join the table user_address (from the right) to the table user
-            var queryResult = from carId in db.car
+            var carListQueryResult = from carId in db.car
                               join carType in db.car_type
                               on carId.car_type_id equals carType.id
                               select new CarSharing.Models.CarProfile
@@ -280,7 +280,9 @@ namespace CarSharing.Views
                                   price = (int)carType.price
                               };
 
-            return View(queryResult.ToList());
+            var carTablesWrapperModel = new CarSharing.Models.WrapCarTables(carListQueryResult.ToList(), db.car_type.ToList());
+
+            return View(carTablesWrapperModel);
         }
 
         // GET: /Admin/CarCreate
@@ -444,6 +446,92 @@ namespace CarSharing.Views
         public void getUserRights()
         {
             // read user rights from the database
+        }
+
+        /*
+         * The CAR TYPE-section
+         * 
+         * where all methods concerning the car-type-data are defined
+         */
+
+        // GET: /Admin/CarTypeCreate
+        public ActionResult CarTypeCreate()
+        {
+            return View();
+        }
+
+        // POST: /Admin/CarTypeCreate
+        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
+        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CarTypeCreate([Bind(Include = "type,seat_size,car_class,price")] car_type carType)
+        {
+            if (ModelState.IsValid)
+            {
+                db.car_type.Add(carType);
+                db.SaveChanges();
+                return RedirectToAction("CarView");
+            }
+
+            return View(carType);
+        }
+
+        // GET: /Admin/CarTypeEdit/5
+        public ActionResult CarTypeEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            car_type carType = db.car_type.Find(id);
+            if (carType == null)
+            {
+                return HttpNotFound();
+            }
+            return View(carType);
+        }
+
+        // POST: /Admin/CarTypeEdit/5
+        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
+        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CarTypeEdit([Bind(Include = "id,type,seat_size,car_class,price")] car_type carType)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(carType).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("CarView");
+            }
+            return View(carType);
+        }
+
+        // GET: /Admin/CarTypeDelete/5
+        public ActionResult CarTypeDelete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            car_type carType = db.car_type.Find(id);
+            if (carType == null)
+            {
+                return HttpNotFound();
+            }
+            return View(carType);
+        }
+
+        // POST: /Admin/CarTypeDelete/5
+        [HttpPost, ActionName("CarTypeDelete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CarTypeDeleteConfirmed(int id)
+        {
+            car_type carType = db.car_type.Find(id);
+            db.car_type.Remove(carType);
+            db.SaveChanges();
+            return RedirectToAction("CarView");
         }
     }
 }
