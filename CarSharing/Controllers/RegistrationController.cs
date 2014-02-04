@@ -97,7 +97,7 @@ namespace CarSharing.Controllers
                 Int16 Port = 587;
                 bool SSL = true;
                 string Username = "eiffeltowercarsharing@gmail.com";
-                string Password = "EiffeltowerJPGM";
+                string Password = "EiffeltowerJPG";
 
                 // Mail options
                 if (user.identity_number != null)
