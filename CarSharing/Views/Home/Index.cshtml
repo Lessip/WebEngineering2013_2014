@@ -19,19 +19,19 @@
                         <div class="cell"><input type="search" id="pickupLocation" name="pickupLocation" placeholder="pickup location" value="@ViewBag.pickupLocation" required /></div>
                     </div>
                     <div class="row">
-                        <div class="cell"><input type="date" id="pickupDate" name="pickupDate" value="@pickupDateTime.ToString("yyyy-MM-dd")" required /></div>
-                        <div class="cell"><input type="time" id="pickupTime" name="pickupTime" value="@pickupDateTime.ToString("HH:mm")" /></div>
+                        <div class="cell"><input type="date" id="pickupDate" name="pickupDate" value="@if (@ViewBag.pickupDate != null) { @ViewBag.pickupDate; } else { @pickupDateTime.ToString("yyyy-MM-dd") }" required /></div>
+                        <div class="cell"><input type="time" id="pickupTime" name="pickupTime" value="@if (@ViewBag.pickupTime != null) { @ViewBag.pickupTime; } else { @pickupDateTime.ToString("HH:mm") }" /></div>
                     </div>
                 </div>
                 <div class="searchSection">
                     <b>Return</b>
                     @{var returnDateTime = pickupDateTime.AddDays(1.25);}
                     <div class="row">
-                        <div class="cell"><input type="search" id="returnLocation" name="returnLocation" placeholder="return location" /></div>
+                        <div class="cell"><input type="search" id="returnLocation" name="returnLocation" placeholder="return location" value="@ViewBag.returnLocation"/></div>
                     </div>
                     <div class="row">
-                        <div class="cell"><input type="date" id="returnDate" name="returnDate" value="@returnDateTime.ToString("yyyy-MM-dd")" /></div>
-                        <div class="cell"><input type="time" id="returnTime" name="returnTime" value="@returnDateTime.ToString("HH:mm")" /></div>
+                        <div class="cell"><input type="date" id="returnDate" name="returnDate" value="@if (@ViewBag.returnDate != null) { @ViewBag.returnDate; } else { @returnDateTime.ToString("yyyy-MM-dd") }" /></div>
+                        <div class="cell"><input type="time" id="returnTime" name="returnTime" value="@if (@ViewBag.returnTime != null) { @ViewBag.returnTime; } else { @returnDateTime.ToString("HH:mm") }" /></div>
                     </div>
                 </div>
                 <div class="searchSection" style="height: 90px;">
@@ -44,8 +44,7 @@
                     <input type="submit" id="bSubmit" value="Search" style="height: 102px;"/>
                 </div>
             </div>
-        }
-    </div>
+        }></div>
     <hr />
     <div class="row">
         <div class="cell">

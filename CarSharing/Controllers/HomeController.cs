@@ -10,26 +10,21 @@ namespace CarSharing.Controllers
     public class HomeController : Controller
     {
         private CarSharingEntities db = new CarSharingEntities();
-        public ActionResult Index(string latLng, string pickupLocation, string radius, string pickupDate, string pickupTime, string returnLocation, string returnDate, string returnTime)
+        public ActionResult Index(string latLng, string pickupLocation, string pickupDate, string pickupTime, string returnLocation, string returnDate, string returnTime, string radius)
         {
+            if (String.IsNullOrEmpty(pickupLocation)) { return View(); }
+
             double searchRadius = 10.0;
-            if (!String.IsNullOrEmpty(pickupLocation))
-            {
-                ViewBag.pickupLocation = pickupLocation;
-            }
-            else
-            {
-                return View();
-            }
-            if (!String.IsNullOrEmpty(latLng))
-            {
-                ViewBag.latLng = latLng;
-            }
-            if (!String.IsNullOrEmpty(radius))
-            {
-                ViewBag.radius = radius;
-                searchRadius = Convert.ToDouble(radius);
-            }
+            ViewBag.pickupLocation = pickupLocation;
+            ViewBag.pickupDate = pickupDate;
+            ViewBag.pickupTime = pickupTime;
+            ViewBag.returnLocation = returnLocation;
+            ViewBag.returnDate = returnDate;
+            ViewBag.returnTime = returnTime;
+            ViewBag.radius = radius;
+
+            if (!String.IsNullOrEmpty(radius)) { searchRadius = Convert.ToDouble(radius); }
+
             // Filter parking_pos != null
             var queryResult = from carId in db.car
                               join carType in db.car_type
