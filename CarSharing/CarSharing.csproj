@@ -390,7 +390,7 @@
     <Content Include="Images\bullet.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Views\Home\About.aspx" />
-    <Content Include="Views\Home\Contact.aspx" />
+    <None Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\_LoginPartial.aspx" />
     <Content Include="Views\Shared\Site.Master" />
