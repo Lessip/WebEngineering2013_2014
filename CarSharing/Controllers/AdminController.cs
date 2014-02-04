@@ -128,7 +128,11 @@ namespace CarSharing.Views
             {
                 return HttpNotFound();
             }
-            return View(userDetail.Single());
+            var contractList = from contractId in db.contract
+                               where contractId.user_id == id
+                               select contractId;
+            CarSharing.Models.WrapUserContractTables result = new CarSharing.Models.WrapUserContractTables(userDetail.Single(), contractList.ToList());
+            return View(result);
         }
 
         // GET: /Admin/UserEdit/5
@@ -343,7 +347,13 @@ namespace CarSharing.Views
             {
                 return HttpNotFound();
             }
-            return View(car.Single());
+
+            var contractList = from contractId in db.contract
+                               where contractId.car_id == id
+                               select contractId;
+            System.Console.WriteLine("ContractList: " + contractList.ToList());
+            CarSharing.Models.WrapCarContractTables result = new CarSharing.Models.WrapCarContractTables(car.Single(), contractList.ToList());
+            return View(result);
         }
 
         // GET: /Admin/CarEdit/5

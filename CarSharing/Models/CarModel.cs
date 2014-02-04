@@ -36,6 +36,25 @@ namespace CarSharing.Models
         }
     }
 
+    [Table("CarContractWrap")]
+    public class WrapCarContractTables
+    {
+        public CarSharing.Models.CarProfile carTable;
+        public List<CarSharing.contract> contractTable;
+
+        public WrapCarContractTables()
+        {
+            carTable = null;
+            contractTable = null;
+        }
+
+        public WrapCarContractTables(CarSharing.Models.CarProfile carProfile, List<contract> contractList)
+        {
+            carTable = carProfile;
+            contractTable = contractList;
+        }
+    }
+
     [Table("CarProfile")]
     public class CarProfile
     {
