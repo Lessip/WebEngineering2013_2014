@@ -7,8 +7,8 @@
     ViewBag.Title = "RSS";
     var db = Database.Open("CarSharingRSS");
     // gib mir alle autos, die nicht besetzt sind !!!  abstellen eines fahrzeugs dieses info zu open
-    var getCars = db.Query("select top(5) * from dbo.car");
-    var getTypes = db.Query("select top(5) * from dbo.car_type");
+    var getCars = db.Query("select top(5) * from dbo.car where dbo.car.state='0' ");
+    //var getTypes = db.Query("select top(5) * from dbo.car_type");
     Response.ContentType = "text/xml+rss";
     Layout = "";
 
@@ -26,7 +26,7 @@
             
             @Html.Raw("</item>")
         }
-        @foreach (var item in getTypes)
+        @*@foreach (var item in getTypes)
         {
             @Html.Raw("<item>")@item
 
@@ -35,6 +35,6 @@
             @Html.Raw("<price>")@item.price @Html.Raw("</price>")
 
             @Html.Raw("</item>")
-        }
+        }*@
     </channel>
 </rss>
