@@ -390,17 +390,6 @@ namespace CarSharing.Views
         // GET: /Admin/CarDelete/5
         public ActionResult CarDelete(int? id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //car car = db.car.Find(id);
-            //if (car == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(car);
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -542,6 +531,72 @@ namespace CarSharing.Views
             db.car_type.Remove(carType);
             db.SaveChanges();
             return RedirectToAction("CarView");
+        }
+
+        /*
+         * The CONTRACT-section
+         * 
+         * where all methods concerning the contract-data are defined
+         */
+        
+        // GET: /Admin/ContractView
+        public ActionResult ContractView()
+        {
+            return View(db.contract.ToList());
+        }
+
+        // GET: /Admin/CarCreate
+        public ActionResult ContractCreate()
+        {
+            return View();
+        }
+
+        // POST: /Admin/ContractCreate
+        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
+        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ContractCreate([Bind(Include = "user_id,car_id,state,pick_up_date,return_date,start_location,end_location,distance,price")] contract contract_element)
+        {
+            if (ModelState.IsValid)
+            {
+                db.contract.Add(contract_element);
+                db.SaveChanges();
+                return RedirectToAction("ContractView");
+            }
+
+            return View(contract_element);
+        }
+
+        // GET: /Admin/ContractEdit/5
+        public ActionResult ContractEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            contract contract_element = db.contract.Find(id);
+            if (contract_element == null)
+            {
+                return HttpNotFound();
+            }
+            return View(contract_element);
+        }
+
+        // POST: /Admin/ContractEdit/5
+        // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
+        // finden Sie unter http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ContractEdit([Bind(Include = "id,user_id,car_id,state,pick_up_date,return_date,start_location,end_location,distance,price")] contract contract_element)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(contract_element).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ContractView");
+            }
+            return View(contract_element);
         }
     }
 }

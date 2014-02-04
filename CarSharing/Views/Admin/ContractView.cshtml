@@ -1,0 +1,78 @@
+﻿@model IEnumerable<CarSharing.contract>
+
+@{
+    ViewBag.Title = "ContractView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ContractView</h2>
+
+<p>
+    @Html.ActionLink("Create New Contract", "ContractCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            User ID
+        </th>
+        <th>
+            Car ID
+        </th>
+        <th>
+            PickUp - date
+        </th>
+        <th>
+            Return - date
+        </th>
+        <th>
+            Pickup location
+        </th>
+        <th>
+            Return location
+        </th>
+        <th>
+            Distance
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(wrapperItem => item.id)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => item.user_id)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => item.car_id)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => item.pick_up_date)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => item.return_date)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => item.start_location)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => item.end_location)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => item.distance)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => item.price)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "ContractEdit", new { id = item.id })
+            </td>
+        </tr>
+    }
+</table>

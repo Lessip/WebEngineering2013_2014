@@ -1,0 +1,91 @@
+﻿@model CarSharing.contract
+
+@{
+    ViewBag.Title = "ContractCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ContractCreate</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.user_id, "user_id", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.user_id)
+                @Html.ValidationMessageFor(model => model.user_id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.car_id, "car_id", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.car_id)
+                @Html.ValidationMessageFor(model => model.car_id)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.pick_up_date, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.pick_up_date)
+                @Html.ValidationMessageFor(model => model.pick_up_date)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.return_date, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.return_date)
+                @Html.ValidationMessageFor(model => model.return_date)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.start_location, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.start_location)
+                @Html.ValidationMessageFor(model => model.start_location)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.end_location, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.end_location)
+                @Html.ValidationMessageFor(model => model.end_location)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.distance, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.distance)
+                @Html.ValidationMessageFor(model => model.distance)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.price)
+                @Html.ValidationMessageFor(model => model.price)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "ContractView")
+</div>
