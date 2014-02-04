@@ -13,6 +13,8 @@ using System.Net.Mime;
 using System.Threading;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Security.Cryptography;
+using System.Text;
 
 
 namespace CarSharing.Controllers
@@ -31,7 +33,21 @@ namespace CarSharing.Controllers
         public ActionResult Registrate()
         {
             return View();
-        }        
+        }  
+      
+        //Hashing password SHA1
+        public static string GetSha1(string value)
+        {
+            var data = Encoding.ASCII.GetBytes(value);
+            var hashData = new SHA1Managed().ComputeHash(data);
+
+            var hash = string.Empty;
+
+            foreach (var b in hashData)
+                hash += b.ToString("X2");
+
+            return hash;
+        }
                
         // POST: /User/Registrate
         // Aktivieren Sie zum Schutz vor übermäßigem Senden von Angriffen die spezifischen Eigenschaften, mit denen eine Bindung erfolgen soll. Weitere Informationen 
@@ -51,8 +67,30 @@ namespace CarSharing.Controllers
 
                 user.access_state = 0;
                 user.identity_number = result;
+                string hashPassword=GetSha1(user.password);
+                user.password = hashPassword;
                 db.user.Add(user);
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    Exception raise = dbEx;
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            string message = string.Format("{0}:{1}",
+                                validationErrors.Entry.Entity.ToString(),
+                                validationError.ErrorMessage);
+                            // raise a new exception nesting
+                            // the current instance as InnerException
+                            raise = new InvalidOperationException(message, raise);
+                        }
+                    }
+                    throw raise;
+                }
 
                 // SMTP options
                 string Host = "smtp.gmail.com";
@@ -67,7 +105,8 @@ namespace CarSharing.Controllers
                     var hosturl =
                             System.Web.HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) +
                             "/Registration/ConfirmRegistration?id=" + user.id+
-                            "&identity_number=" + user.identity_number;
+                            "&identity_number=" + user.identity_number +
+                            "&timelimit=" + user.timelimit;
                     var confirmationLink = string.Format("<a href=\"{0}\">Click to confirm your registration</a>",
                                                              hosturl);
                     string To = user.email;
@@ -99,7 +138,7 @@ namespace CarSharing.Controllers
       
         public ActionResult ConfirmRegistration(user_account user)
         {                     
-            if ((user != null) && (user.timelimit >= System.DateTime.Now))
+            if ((user.identity_number != null) && (user.id!=null) && (user.timelimit >= System.DateTime.Now))
             {
                 return RedirectToAction("ConfirmationSuccess", new {  id= user.id, identity_number = user.identity_number });
             }
