@@ -6,7 +6,7 @@
     //var db = Database.Open("C:/Users/mash/Source/Repos/WebEngineering2013_2014/CarSharing/App_Data/aspnet-CarSharing-20131111131016.mdf");
     ViewBag.Title = "RSS";
     var db = Database.Open("CarSharingRSS");
-
+    // gib mir alle autos, die nicht besetzt sind !!!  abstellen eines fahrzeugs dieses info zu open
     var getCars = db.Query("select top(5) * from dbo.car");
     var getTypes = db.Query("select top(5) * from dbo.car_type");
     Response.ContentType = "text/xml+rss";
