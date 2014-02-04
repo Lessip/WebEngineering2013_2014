@@ -320,6 +320,20 @@ thead td {
 }
 
 .result {
-    background-color: #ffbb00;
+    margin-bottom: 5px;
+    background-color: #F4C833;
     border-radius: 5px;
+    box-shadow: 2px 2px 2px #666;
+}
+
+.info {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 9px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px #666;
+    background-color: #FF3322;
+    color: black;
+    font-weight: bold;
 }

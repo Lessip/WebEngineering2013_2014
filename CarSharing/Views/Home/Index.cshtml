@@ -1,43 +1,222 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Index";
-}
-<!DOCTYPE html>
+﻿@model List<CarSharing.Models.CarProfile>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Search Page</title>
-</head>
-<body>
-    <h2>Search Page</h2>
-    @using (Html.BeginForm("SearchResult","Home", FormMethod.Get))
-    {
-        <div class="row">
-            <div class="searchSection">
-                Pickup
-                @{var pickupDateTime = DateTime.Today.AddDays(1.5);}
-                <div class="row">
-                    <div class="cell"><input type="search" id="pickupLocation" name="pickupLocation" placeholder="pickup location" autofocus required /></div>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Search Result";
+}
+
+<div class="info" id="infobox">@ViewBag.msg</div>
+<div class="table">
+    <div class="row">
+        @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @id = "fSearch" }))
+        {
+            <div class="row">
+                <div class="searchSection">
+                    <b>Pickup</b>
+                    @{var pickupDateTime = DateTime.Today.AddDays(1.5);}
+                    <div class="row">
+                        <input type="hidden" id="latLng" name="latLng"  value="@ViewBag.latLng"/>
+                        <div class="cell"><input type="search" id="pickupLocation" name="pickupLocation" placeholder="pickup location" value="@ViewBag.pickupLocation" required /></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell"><input type="date" id="pickupDate" name="pickupDate" value="@pickupDateTime.ToString("yyyy-MM-dd")" required /></div>
+                        <div class="cell"><input type="time" id="pickupTime" name="pickupTime" value="@pickupDateTime.ToString("HH:mm")" /></div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="cell"><input type="date" id="pickupDate" name="pickupDate" value="@pickupDateTime.ToString("yyyy-MM-dd")" required /></div>
-                    <div class="cell"><input type="time" id="pickupTime" name="pickupTime" value="@pickupDateTime.ToString("HH:mm")" /></div>
+                <div class="searchSection">
+                    <b>Return</b>
+                    @{var returnDateTime = pickupDateTime.AddDays(1.25);}
+                    <div class="row">
+                        <div class="cell"><input type="search" id="returnLocation" name="returnLocation" placeholder="return location" /></div>
+                    </div>
+                    <div class="row">
+                        <div class="cell"><input type="date" id="returnDate" name="returnDate" value="@returnDateTime.ToString("yyyy-MM-dd")" /></div>
+                        <div class="cell"><input type="time" id="returnTime" name="returnTime" value="@returnDateTime.ToString("HH:mm")" /></div>
+                    </div>
+                </div>
+                <div class="searchSection" style="height: 90px;">
+                    <b>Search Radius</b>
+                    <div class="row">
+                        <div class="cell"><input type="number" id="radius" name="radius" style="width: 72px;" placeholder="10" value="@ViewBag.radius" /> km</div>
+                    </div>
+                </div>
+                <div class="cell" style="margin: 0px;">
+                    <input type="submit" id="bSubmit" value="Search" style="height: 102px;"/>
                 </div>
             </div>
-            <div class="searchSection">
-                Return
-                @{var returnDateTime = pickupDateTime.AddDays(1.25);}
-                <div class="row">
-                    <div class="cell"><input type="search" id="returnLocation" name="returnLocation" placeholder="return location" /></div>
-                </div>
-                <div class="row">
-                    <div class="cell"><input type="date" id="returnDate" name="returnDate" value="@returnDateTime.ToString("yyyy-MM-dd")" /></div>
-                    <div class="cell"><input type="time" id="returnTime" name="returnTime" value="@returnDateTime.ToString("HH:mm")" /></div>
-                </div>
-            </div>
+        }
+    </div>
+    <hr />
+    <div class="row">
+        <div class="cell">
+            <div id="map-canvas"></div>
         </div>
-        <input type="submit" value="Search" />
+        <div class="cell">
+            @for (var i = 0; i < Model.Count(); i++)
+            {
+                var item = Model.ElementAt(i);
+                if (item.parking_pos != null){
+                    <div class="result">
+                        <div class="row"><div class="cell">
+                            @item.name
+                        </div></div> 
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+    var geocoder;
+    var map;
+
+    // array with car-information
+    var cars = [
+        @for (var i = 0; i < Model.Count(); i++ )
+        {
+            var item = Model.ElementAt(i);
+            if (item.parking_pos != null)
+            {
+                @Html.Raw("            ['");
+                @Html.Raw(item.name);
+                @Html.Raw("', ");
+                @Html.Raw(item.parking_pos);
+                @Html.Raw(", ");
+                @Html.Raw(i);
+                if (i == (Model.Count()-1))
+                    { @Html.Raw("]\r\n"); }
+                else
+                    { @Html.Raw("],\r\n"); }
+            }
+        }
+    ];
+
+    function denied() {
+        return false;
     }
-</body>
-</html>
+
+    function initialize() {
+        geocoder = new google.maps.Geocoder();
+        if (document.getElementById('pickupLocation').value == "") {
+            var latlng = new google.maps.LatLng(51.000, 10.500);
+            var mapOptions = {
+                zoom: 6,
+                center: latlng
+            }
+
+            //map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        } else {
+            map = new google.maps.Map(document.getElementById('map-canvas'));
+
+            setMarkers(map, cars);
+
+            codeAddress();
+        }
+    }
+
+    function setMarkers(map, locations) {
+        for (var i = 0; i < locations.length; i++) {
+            var location = locations[i];
+            var myLatLng = new google.maps.LatLng(location[1], location[2]);
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                //icon: image,
+                //shape: shape,
+                title: location[0],
+                zIndex: location[3]
+            });
+        }
+    }
+
+    function getLatLng() {
+        var address = document.getElementById('pickupLocation').value;
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {                
+                document.getElementById('latLng').value = results[0].geometry.location;
+            }
+        });
+    }
+
+    function codeAddress() {
+        var searchFlag = '../../Images/searchFlag.png';
+        var address = document.getElementById('pickupLocation').value;
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                map.setZoom(12);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    title: address,
+                    icon: searchFlag
+                });
+            } else {
+                $("#infobox").text("Sorry, the requested location cannot be found.");
+            }
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+    
+
+    // set and change focus ->
+    $("#pickupLocation").keydown(function(event){
+        if(event.keyCode == 13){
+            document.getElementById('pickupDate').focus()
+        }
+    });
+
+    $("#pickupDate").keydown(function (event) {
+        if (event.keyCode == 13) {
+            document.getElementById('pickupTime').focus()
+        }
+    });
+
+    $("#pickupTime").keydown(function (event) {
+        if (event.keyCode == 13) {
+            document.getElementById('returnLocation').focus()
+        }
+    });
+
+    $("#returnLocation").keydown(function (event) {
+        if (event.keyCode == 13) {
+            document.getElementById('returnDate').focus()
+        }
+    });
+
+    $("#returnDate").keydown(function (event) {
+        if (event.keyCode == 13) {
+            document.getElementById('returnTime').focus()
+        }
+    });
+
+    $("#returnTime").keydown(function (event) {
+        if (event.keyCode == 13) {
+            document.getElementById('radius').focus()
+        }
+    });
+
+    $("#radius").keydown(function (event) {
+        if (event.keyCode == 13) {
+            document.getElementById('bSubmit').click()
+        }
+    });
+    // set and change focus -<
+
+    // save latitude and longitude
+    $('#pickupLocation').change(function () {
+        getLatLng();
+    });
+
+    // avoid submit by pressing ENTER
+    function checkEnter(e) {
+        e = e || event;
+        var txtArea = /textarea/i.test((e.target || e.srcElement).tagName);
+        return txtArea || (e.keyCode || e.which || e.charCode || 0) !== 13;
+    }
+
+    document.querySelector('form').onkeypress = checkEnter;
+</script>

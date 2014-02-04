@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
+using System.Device.Location;
 
 
 namespace CarSharing.Models
@@ -79,6 +80,28 @@ namespace CarSharing.Models
             seat_size = (int)new_car_type.seat_size;
             car_class = (int)new_car_type.car_class;
             price = (int)new_car_type.price;
+        }
+
+        public double getDistance(string latLng)
+        {
+            if (latLng == null || latLng == "")
+                return -1.0;
+            latLng = latLng.Replace('(', ' ');
+            latLng = latLng.Replace(')', ' ');
+
+            String[] strA = latLng.Split(',');
+            String[] strB = this.parking_pos.Split(',');
+
+            System.Globalization.NumberFormatInfo format = new System.Globalization.NumberFormatInfo();
+            format.NumberDecimalSeparator = ".";
+
+            double[] a = new double[2] { Convert.ToDouble(strA[0], format), Convert.ToDouble(strA[1], format) };
+            double[] b = new double[2] { Convert.ToDouble(strB[0], format), Convert.ToDouble(strB[1], format) };
+
+            var sCoord = new GeoCoordinate(a[0], a[1]);
+            var eCoord = new GeoCoordinate(b[0], b[1]);
+
+            return Math.Round(sCoord.GetDistanceTo(eCoord) / 1000.0, 1);
         }
     }
 }
