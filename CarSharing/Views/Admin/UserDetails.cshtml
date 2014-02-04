@@ -1,4 +1,4 @@
-﻿@model CarSharing.Models.UserProfile
+﻿@model CarSharing.Models.WrapUserContractTables
 
 @{
     ViewBag.Title = "UserDetails";
@@ -10,103 +10,160 @@
 <div>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.login_name)
+            @Html.DisplayNameFor(model => model.userTable.login_name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.login_name)
+            @Html.DisplayFor(model => model.userTable.login_name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.firstname)
+            @Html.DisplayNameFor(model => model.userTable.firstname)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.firstname)
+            @Html.DisplayFor(model => model.userTable.firstname)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            @Html.DisplayNameFor(model => model.userTable.name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.name)
+            @Html.DisplayFor(model => model.userTable.name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.date_of_birth)
+            @Html.DisplayNameFor(model => model.userTable.date_of_birth)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.date_of_birth)
+            @Html.DisplayFor(model => model.userTable.date_of_birth)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.identity_number)
+            @Html.DisplayNameFor(model => model.userTable.identity_number)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.identity_number)
+            @Html.DisplayFor(model => model.userTable.identity_number)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.timelimit)
+            @Html.DisplayNameFor(model => model.userTable.timelimit)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.timelimit)
+            @Html.DisplayFor(model => model.userTable.timelimit)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.password)
+            @Html.DisplayNameFor(model => model.userTable.password)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.password)
+            @Html.DisplayFor(model => model.userTable.password)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.email)
+            @Html.DisplayNameFor(model => model.userTable.email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.email)
+            @Html.DisplayFor(model => model.userTable.email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.access_state)
+            @Html.DisplayNameFor(model => model.userTable.access_state)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.access_state)
+            @Html.DisplayFor(model => model.userTable.access_state)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.street)
+            @Html.DisplayNameFor(model => model.userTable.street)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.street)
+            @Html.DisplayFor(model => model.userTable.street)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.post_code)
+            @Html.DisplayNameFor(model => model.userTable.post_code)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.post_code)
+            @Html.DisplayFor(model => model.userTable.post_code)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.city)
+            @Html.DisplayNameFor(model => model.userTable.city)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.city)
+            @Html.DisplayFor(model => model.userTable.city)
         </dd>
     </dl>
 </div>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            User ID
+        </th>
+        <th>
+            PickUp - date
+        </th>
+        <th>
+            Return - date
+        </th>
+        <th>
+            Pickup location
+        </th>
+        <th>
+            Return location
+        </th>
+        <th>
+            Distance
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
+    @foreach (CarSharing.contract contractItem in ViewData.Model.contractTable)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.id)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.user_id)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.pick_up_date)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.return_date)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.start_location)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.end_location)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.distance)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.price)
+            </td>
+        </tr>
+    }
+</table>
 <p>
-    @Html.ActionLink("Edit", "UserEdit", new { id = Model.id }) |
+    @Html.ActionLink("Edit", "UserEdit", new { id = Model.userTable.id }) |
     @Html.ActionLink("Back to List", "UserView")
 </p>

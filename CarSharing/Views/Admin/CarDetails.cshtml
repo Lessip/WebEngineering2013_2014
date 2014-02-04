@@ -1,4 +1,4 @@
-﻿@model CarSharing.Models.CarProfile
+﻿@model CarSharing.Models.WrapCarContractTables
 
 @{
     ViewBag.Title = "CarDetails";
@@ -8,7 +8,7 @@
 <script>
         function initialize()
         {
-            var myLatlng = new google.maps.LatLng(@Html.DisplayFor(model => model.parking_pos));
+            var myLatlng = new google.maps.LatLng(@Html.DisplayFor(model => model.carTable.parking_pos));
             var mapOptions = {
                 zoom: 14,
                 center: myLatlng
@@ -18,7 +18,7 @@
             var marker = new google.maps.Marker({
                 position: myLatlng,
                 map: map,
-                title: '@Html.DisplayFor(model => model.name)'
+                title: '@Html.DisplayFor(model => model.carTable.name)'
             });
         }
 
@@ -31,128 +31,185 @@
 <div>
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.id)
+            @Html.DisplayNameFor(model => model.carTable.id)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.id)
+            @Html.DisplayFor(model => model.carTable.id)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.state)
+            @Html.DisplayNameFor(model => model.carTable.state)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.state)
+            @Html.DisplayFor(model => model.carTable.state)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            @Html.DisplayNameFor(model => model.carTable.name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.name)
+            @Html.DisplayFor(model => model.carTable.name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.registration_number)
+            @Html.DisplayNameFor(model => model.carTable.registration_number)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.registration_number)
+            @Html.DisplayFor(model => model.carTable.registration_number)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.mileage)
+            @Html.DisplayNameFor(model => model.carTable.mileage)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.mileage)
+            @Html.DisplayFor(model => model.carTable.mileage)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.aircon)
+            @Html.DisplayNameFor(model => model.carTable.aircon)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.aircon)
+            @Html.DisplayFor(model => model.carTable.aircon)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.navigation)
+            @Html.DisplayNameFor(model => model.carTable.navigation)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.navigation)
+            @Html.DisplayFor(model => model.carTable.navigation)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.transmission_type)
+            @Html.DisplayNameFor(model => model.carTable.transmission_type)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.transmission_type)
+            @Html.DisplayFor(model => model.carTable.transmission_type)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.power)
+            @Html.DisplayNameFor(model => model.carTable.power)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.power)
+            @Html.DisplayFor(model => model.carTable.power)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.picture_link)
+            @Html.DisplayNameFor(model => model.carTable.picture_link)
         </dt>
 
         <dd>
-            <img src=@Html.DisplayFor(model => model.picture_link) alt=@Html.DisplayNameFor(model => model.name)>
+            <img src=@Html.DisplayFor(model => model.carTable.picture_link) alt=@Html.DisplayNameFor(model => model.carTable.name)>
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.parking_pos)
+            @Html.DisplayNameFor(model => model.carTable.parking_pos)
         </dt>
 
         <dd>
             <div id="map-canvas" style="height:300px; width:600px;"></div>
-            @Html.DisplayFor(model => model.parking_pos)
+            @Html.DisplayFor(model => model.carTable.parking_pos)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.type)
+            @Html.DisplayNameFor(model => model.carTable.type)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.type)
+            @Html.DisplayFor(model => model.carTable.type)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.seat_size)
+            @Html.DisplayNameFor(model => model.carTable.seat_size)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.seat_size)
+            @Html.DisplayFor(model => model.carTable.seat_size)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.car_class)
+            @Html.DisplayNameFor(model => model.carTable.car_class)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.car_class)
+            @Html.DisplayFor(model => model.carTable.car_class)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.price)
+            @Html.DisplayNameFor(model => model.carTable.price)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.price)
+            @Html.DisplayFor(model => model.carTable.price)
         </dd>
     </dl>
 </div>
+<table class="table">
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            User ID
+        </th>
+        <th>
+            PickUp - date
+        </th>
+        <th>
+            Return - date
+        </th>
+        <th>
+            Pickup location
+        </th>
+        <th>
+            Return location
+        </th>
+        <th>
+            Distance
+        </th>
+        <th>
+            Price
+        </th>
+    </tr>
+    @foreach (CarSharing.contract contractItem in ViewData.Model.contractTable)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.id)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.user_id)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.pick_up_date)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.return_date)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.start_location)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.end_location)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.distance)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.price)
+            </td>
+        </tr>
+    }
+</table>
 <p>
-    @Html.ActionLink("Edit", "CarEdit", new { id = Model.id }) |
+    @Html.ActionLink("Edit", "CarEdit", new { id = Model.carTable.id }) |
     @Html.ActionLink("Back to List", "CarView")
 </p>

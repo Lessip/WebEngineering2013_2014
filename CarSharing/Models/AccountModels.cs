@@ -79,6 +79,25 @@ namespace CarSharing.Models
         }
     }
 
+    [Table("UserContractWrap")]
+    public class WrapUserContractTables
+    {
+        public CarSharing.Models.UserProfile userTable;
+        public List<CarSharing.contract> contractTable;
+
+        public WrapUserContractTables()
+        {
+            userTable = null;
+            contractTable = null;
+        }
+
+        public WrapUserContractTables(CarSharing.Models.UserProfile userProfile, List<contract> contractList)
+        {
+            userTable = userProfile;
+            contractTable = contractList;
+        }
+    }
+
     public class RegisterExternalLoginModel
     {
         [Required]

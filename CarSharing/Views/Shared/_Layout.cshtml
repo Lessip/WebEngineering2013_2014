@@ -28,12 +28,12 @@
             <ul id="menu">
                 <li>@Html.ActionLink("Search Page", "Index", "Home")</li>
                 <li>@Html.ActionLink("TEAM 8", "About", "Home")</li>
-                <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
-                <li>@Html.ActionLink("Admin", "Index", "Admin")</li>
+                <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>                
             </ul>
         </div>
         <div id="navAdmin" class="nav">
             <ul id="menu">
+                <li>@Html.ActionLink("Contracts", "ContractView", "Admin")</li>
                 <li>@Html.ActionLink("Users", "UserView", "Admin")</li>
                 <li>@Html.ActionLink("Cars", "CarView", "Admin")</li>
             </ul>

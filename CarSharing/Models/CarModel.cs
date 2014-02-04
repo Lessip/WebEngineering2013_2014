@@ -18,6 +18,44 @@ namespace CarSharing.Models
         public System.Data.Entity.DbSet<CarSharing.car_type> car_types { get; set; }
     }
 
+    [Table("CarWrap")]
+    public class WrapCarTables
+    {
+        public List<CarSharing.Models.CarProfile> carTable;
+        public List<CarSharing.car_type> carTypeTable;
+
+        public WrapCarTables()
+        {
+            carTable = null;
+            carTypeTable = null;
+        }
+
+        public WrapCarTables(List<CarSharing.Models.CarProfile> carList, List<car_type> carTypeList)
+        {
+            carTable = carList;
+            carTypeTable = carTypeList;
+        }
+    }
+
+    [Table("CarContractWrap")]
+    public class WrapCarContractTables
+    {
+        public CarSharing.Models.CarProfile carTable;
+        public List<CarSharing.contract> contractTable;
+
+        public WrapCarContractTables()
+        {
+            carTable = null;
+            contractTable = null;
+        }
+
+        public WrapCarContractTables(CarSharing.Models.CarProfile carProfile, List<contract> contractList)
+        {
+            carTable = carProfile;
+            contractTable = contractList;
+        }
+    }
+
     [Table("CarProfile")]
     public class CarProfile
     {
