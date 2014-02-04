@@ -141,5 +141,23 @@ namespace CarSharing.Models
 
             return Math.Round(sCoord.GetDistanceTo(eCoord) / 1000.0, 1);
         }
+
+        public int getStatus(DateTime startDate, DateTime endDate, List<CarSharing.contract> contrList)
+        {            
+            // [ = startDate
+            // ] = endDate 
+            // - = contract
+
+            //----[---      ]
+            //    [ ------  ]
+            //    [   ------]---
+            foreach (var contr in contrList){
+                if (contr.return_date > startDate && contr.return_date <= endDate)
+                    return 1;
+                if (contr.pick_up_date >= startDate && contr.pick_up_date < endDate)
+                    return 1;
+            }
+            return 0;    
+        }
     }
 }

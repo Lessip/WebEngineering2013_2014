@@ -31,6 +31,7 @@
                 <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>                
             </ul>
         </div>
+        @*@if (ViewBag.userrole == "administrator"){*@
         <div id="navAdmin" class="nav">
             <ul id="menu">
                 <li>@Html.ActionLink("Contracts", "ContractView", "Admin")</li>
@@ -38,6 +39,7 @@
                 <li>@Html.ActionLink("Cars", "CarView", "Admin")</li>
             </ul>
         </div>
+        @*}*@
         <button id="rss" onclick="rss()" />
     </div>
 

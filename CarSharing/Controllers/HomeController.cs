@@ -17,6 +17,10 @@ namespace CarSharing.Controllers
             {
                 ViewBag.pickupLocation = pickupLocation;
             }
+            else
+            {
+                return View();
+            }
             if (!String.IsNullOrEmpty(latLng))
             {
                 ViewBag.latLng = latLng;
@@ -27,7 +31,6 @@ namespace CarSharing.Controllers
                 searchRadius = Convert.ToDouble(radius);
             }
             // Filter parking_pos != null
-            // Simply join the table user_address (from the right) to the table user
             var queryResult = from carId in db.car
                               join carType in db.car_type
                               on carId.car_type_id equals carType.id
@@ -54,11 +57,28 @@ namespace CarSharing.Controllers
 
             var relevantCars = new List<CarSharing.Models.CarProfile>();
 
+            // select relevant cars
             foreach (var item in queryResult)
             {
+                bool relevant = true;
+                var contractList = from contractId in db.contract
+                                   where contractId.car_id == item.id
+                                   select contractId;
+
+                // distance from pickupLocation to car.parking_pos
                 var dist = item.getDistance(latLng);
+
                 ViewBag.msg += item.name + " " + dist.ToString() + " km \r\n";
-                if ((dist <= searchRadius) && (dist >= 0))
+
+                // distance
+                relevant = relevant && ((dist <= searchRadius) && (dist >= 0));
+                
+                // status
+                relevant = relevant && (item.getStatus( Convert.ToDateTime(pickupDate + " " + pickupTime),
+                                                        Convert.ToDateTime(returnDate + " " + returnTime),
+                                                        contractList.ToList()) == 0                        );
+                
+                if (relevant)
                 {
                     relevantCars.Add(item);
                 }

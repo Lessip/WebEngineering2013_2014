@@ -52,16 +52,19 @@
             <div id="map-canvas"></div>
         </div>
         <div class="cell">
-            @for (var i = 0; i < Model.Count(); i++)
+            @if (Model != null)
             {
-                var item = Model.ElementAt(i);
-                if (item.parking_pos != null){
-                    <div class="result">
-                        <div class="row"><div class="cell">
-                            @item.name
-                        </div></div> 
-                    </div>
-                }
+                for (var i = 0; i < Model.Count(); i++)
+                {
+                    var item = Model.ElementAt(i);
+                    if (item.parking_pos != null){
+                        <div class="result">
+                            <div class="row"><div class="cell">
+                                @item.name
+                            </div></div> 
+                        </div>
+                    }
+                }                
             }
         </div>
     </div>
@@ -74,28 +77,26 @@
 
     // array with car-information
     var cars = [
-        @for (var i = 0; i < Model.Count(); i++ )
-        {
-            var item = Model.ElementAt(i);
-            if (item.parking_pos != null)
+        @if (Model != null){
+            for (var i = 0; i < Model.Count(); i++ )
             {
-                @Html.Raw("            ['");
-                @Html.Raw(item.name);
-                @Html.Raw("', ");
-                @Html.Raw(item.parking_pos);
-                @Html.Raw(", ");
-                @Html.Raw(i);
-                if (i == (Model.Count()-1))
-                    { @Html.Raw("]\r\n"); }
-                else
-                    { @Html.Raw("],\r\n"); }
+                var item = Model.ElementAt(i);
+                if (item.parking_pos != null)
+                {
+                    @Html.Raw("            ['");
+                    @Html.Raw(item.name);
+                    @Html.Raw("', ");
+                    @Html.Raw(item.parking_pos);
+                    @Html.Raw(", ");
+                    @Html.Raw(i);
+                    if (i == (Model.Count()-1))
+                        { @Html.Raw("]\r\n"); }
+                    else
+                        { @Html.Raw("],\r\n"); }
+                }
             }
         }
     ];
-
-    function denied() {
-        return false;
-    }
 
     function initialize() {
         geocoder = new google.maps.Geocoder();
