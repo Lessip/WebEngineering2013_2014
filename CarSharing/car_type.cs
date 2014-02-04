@@ -24,6 +24,7 @@ namespace CarSharing
         public Nullable<int> car_class { get; set; }
         public Nullable<decimal> price { get; set; }
         public Nullable<int> seat_size { get; set; }
+        public Nullable<System.DateTime> remove_date { get; set; }
     
         public virtual ICollection<car> car { get; set; }
     }

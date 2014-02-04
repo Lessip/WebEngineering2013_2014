@@ -1,4 +1,4 @@
-﻿// Die T4-Codegenerierung ist für Modell 'D:\Eigene Dateien\Studium\2013_2014_WS\Softwareengineering\SourceCode\WebEngineering2013_2014_mssql\CarSharing\CarSharingModel.edmx' aktiviert. 
+﻿// Die T4-Codegenerierung ist für Modell 'D:\Eigene Dateien\Studium\2013_2014_WS\Softwareengineering\SourceCode\WebEngineering2013_2014-mssql\CarSharing\WebEngineering2013_2014\CarSharing\CarSharingModel.edmx' aktiviert. 
 // Um die Generierung von Legacycode zu aktivieren, ändern Sie den Wert der Designer-Eigenschaft 'Code Generation Strategy'
 // in 'Legacy ObjectContext'. Diese Eigenschaft wird im Eigenschaftenfenster angezeigt, wenn das Modell
 // im Designer geöffnet ist.

@@ -19,8 +19,9 @@
           <Property Name="navigation" Type="bit" />
           <Property Name="transmission_type" Type="bit" />
           <Property Name="power" Type="int" />
-          <Property Name="picture_link" Type="nvarchar" MaxLength="50" />
+          <Property Name="picture_link" Type="nvarchar(max)" />
           <Property Name="parking_pos" Type="nvarchar" MaxLength="50" />
+          <Property Name="remove_date" Type="datetime" />
         </EntityType>
         <EntityType Name="car_type">
           <Key>
@@ -31,6 +32,7 @@
           <Property Name="seat_size" Type="int" />
           <Property Name="class" Type="int" />
           <Property Name="price" Type="money" />
+          <Property Name="remove_date" Type="datetime" />
         </EntityType>
         <EntityType Name="contract">
           <Key>
@@ -60,6 +62,7 @@
           <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="access_state" Type="int" />
           <Property Name="timelimit" Type="datetime" />
+          <Property Name="remove_date" Type="datetime" />
         </EntityType>
         <EntityType Name="user_address">
           <Key>
@@ -70,6 +73,7 @@
           <Property Name="street" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="post_code" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="city" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="remove_date" Type="datetime" />
         </EntityType>
         <Association Name="FK_car_contract">
           <End Role="car" Type="Self.car" Multiplicity="1" />
@@ -164,6 +168,7 @@
           <Property Name="parking_pos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="contract" Relationship="Self.FK_car_contract" FromRole="car" ToRole="contract" />
           <NavigationProperty Name="car_type" Relationship="Self.FK_type_car" FromRole="car" ToRole="car_type" />
+          <Property Name="remove_date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="car_type">
           <Key>
@@ -175,6 +180,7 @@
           <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="car" Relationship="Self.FK_type_car" FromRole="car_type" ToRole="car" />
           <Property Name="seat_size" Type="Int32" />
+          <Property Name="remove_date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="contract">
           <Key>
@@ -208,6 +214,7 @@
           <NavigationProperty Name="contract" Relationship="Self.FK_user_contract" FromRole="user" ToRole="contract" />
           <NavigationProperty Name="user_address" Relationship="Self.FK_user_address" FromRole="user" ToRole="user_address" />
           <Property Name="timelimit" Type="DateTime" Precision="3" />
+          <Property Name="remove_date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="user_address">
           <Key>
@@ -219,6 +226,7 @@
           <Property Name="post_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="city" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="user" Relationship="Self.FK_user_address" FromRole="user_address" ToRole="user" />
+          <Property Name="remove_date" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_car_contract">
           <End Role="car" Type="Self.car" Multiplicity="1" />
@@ -300,6 +308,7 @@
           <EntitySetMapping Name="car">
             <EntityTypeMapping TypeName="CarSharingModel.car">
               <MappingFragment StoreEntitySet="car">
+                <ScalarProperty Name="remove_date" ColumnName="remove_date" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="car_type_id" ColumnName="car_type_id" />
                 <ScalarProperty Name="state" ColumnName="state" />
@@ -318,6 +327,7 @@
           <EntitySetMapping Name="car_type">
             <EntityTypeMapping TypeName="CarSharingModel.car_type">
               <MappingFragment StoreEntitySet="car_type">
+                <ScalarProperty Name="remove_date" ColumnName="remove_date" />
                 <ScalarProperty Name="seat_size" ColumnName="seat_size" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="type" ColumnName="type" />
@@ -344,6 +354,7 @@
           <EntitySetMapping Name="user">
             <EntityTypeMapping TypeName="CarSharingModel.user_account">
               <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="remove_date" ColumnName="remove_date" />
                 <ScalarProperty Name="timelimit" ColumnName="timelimit" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="login_name" ColumnName="login_name" />
@@ -360,6 +371,7 @@
           <EntitySetMapping Name="user_address">
             <EntityTypeMapping TypeName="CarSharingModel.user_address">
               <MappingFragment StoreEntitySet="user_address">
+                <ScalarProperty Name="remove_date" ColumnName="remove_date" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="street" ColumnName="street" />

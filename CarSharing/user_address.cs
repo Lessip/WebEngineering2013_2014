@@ -19,6 +19,7 @@ namespace CarSharing
         public string street { get; set; }
         public string post_code { get; set; }
         public string city { get; set; }
+        public Nullable<System.DateTime> remove_date { get; set; }
     
         public virtual user_account user { get; set; }
     }

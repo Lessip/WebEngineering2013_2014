@@ -30,6 +30,7 @@ namespace CarSharing
         public string email { get; set; }
         public Nullable<int> access_state { get; set; }
         public Nullable<System.DateTime> timelimit { get; set; }
+        public Nullable<System.DateTime> remove_date { get; set; }
     
         public virtual ICollection<contract> contract { get; set; }
         public virtual ICollection<user_address> user_address { get; set; }

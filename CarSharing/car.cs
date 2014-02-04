@@ -31,6 +31,7 @@ namespace CarSharing
         public Nullable<int> power { get; set; }
         public string picture_link { get; set; }
         public string parking_pos { get; set; }
+        public Nullable<System.DateTime> remove_date { get; set; }
     
         public virtual ICollection<contract> contract { get; set; }
         public virtual car_type car_type { get; set; }
