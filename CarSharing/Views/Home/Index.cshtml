@@ -5,7 +5,9 @@
     ViewBag.Title = "Search Result";
 }
 
-<div class="info" id="infobox">@ViewBag.msg</div>
+@if (ViewBag.msg != "" && @ViewBag.msg != null){
+    <div class="info" id="infobox">@ViewBag.msg</div>
+}
 <div class="table">
     <div class="row">
         @using (Html.BeginForm("Index", "Home", FormMethod.Get, new { @id = "fSearch" }))
@@ -15,7 +17,7 @@
                     <b>Pickup</b>
                     @{var pickupDateTime = DateTime.Today.AddDays(1.5);}
                     <div class="row">
-                        <input type="hidden" id="latLng" name="latLng"  value="@ViewBag.latLng"/>
+                        <input type="hidden" id="latLng1" name="latLng1"  value="@ViewBag.latLng1"/>
                         <div class="cell"><input type="search" id="pickupLocation" name="pickupLocation" placeholder="pickup location" value="@ViewBag.pickupLocation" required /></div>
                     </div>
                     <div class="row">
@@ -27,6 +29,7 @@
                     <b>Return</b>
                     @{var returnDateTime = pickupDateTime.AddDays(1.25);}
                     <div class="row">
+                        <input type="hidden" id="latLng2" name="latLng2" value="@ViewBag.latLng2" />
                         <div class="cell"><input type="search" id="returnLocation" name="returnLocation" placeholder="return location" value="@ViewBag.returnLocation"/></div>
                     </div>
                     <div class="row">
@@ -38,13 +41,15 @@
                     <b>Search Radius</b>
                     <div class="row">
                         <div class="cell"><input type="number" id="radius" name="radius" style="width: 72px;" placeholder="10" value="@ViewBag.radius" /> km</div>
+                        <input type="hidden" id="carNumber" name="carNumber" value="" />
                     </div>
                 </div>
                 <div class="cell" style="margin: 0px;">
                     <input type="submit" id="bSubmit" value="Search" style="height: 102px;"/>
                 </div>
             </div>
-        }></div>
+        }
+    </div>
     <hr />
     <div class="row">
         <div class="cell">
@@ -56,14 +61,18 @@
                 for (var i = 0; i < Model.Count(); i++)
                 {
                     var item = Model.ElementAt(i);
-                    if (item.parking_pos != null){
-                        <div class="result">
-                            <div class="row"><div class="cell">
-                                @item.name
-                            </div></div> 
+                    if (item.parking_pos != null)
+                    {
+                        <div class="result" onclick="$('#carNumber').val(@item.id); document.getElementById('bSubmit').click();">
+                            <div class="row">
+                                <div class="resultcell"><b>@item.name</b></div><div class="resultcell" style="font-size: 20px; font-weight: bold;">@item.price €</div>
+                            </div>
+                            <div class="row">
+                                <div class="resultcell">@item.power hp</div><div class="resultcell">@item.seat_size Seats</div>
+                            </div>
                         </div>
                     }
-                }                
+                }
             }
         </div>
     </div>
@@ -98,6 +107,7 @@
     ];
 
     function initialize() {
+        $('#carNumber').val('');
         geocoder = new google.maps.Geocoder();
         if (document.getElementById('pickupLocation').value == "") {
             var latlng = new google.maps.LatLng(51.000, 10.500);
@@ -131,11 +141,20 @@
         }
     }
 
-    function getLatLng() {
+    function getLatLng1() {
         var address = document.getElementById('pickupLocation').value;
         geocoder.geocode({ 'address': address }, function (results, status) {
             if (status == google.maps.GeocoderStatus.OK) {                
-                document.getElementById('latLng').value = results[0].geometry.location;
+                document.getElementById('latLng1').value = results[0].geometry.location;
+            }
+        });
+    }
+
+    function getLatLng2(){
+        var address = document.getElementById('returnLocation').value;
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                document.getElementById('latLng2').value = results[0].geometry.location;
             }
         });
     }
@@ -201,14 +220,19 @@
 
     $("#radius").keydown(function (event) {
         if (event.keyCode == 13) {
-            document.getElementById('bSubmit').click()
+            $("#bSubmit").click();
         }
     });
     // set and change focus -<
 
     // save latitude and longitude
     $('#pickupLocation').change(function () {
-        getLatLng();
+        getLatLng1();
+    });
+
+    // save latitude and longitude
+    $('#returnLocation').change(function () {
+        getLatLng2();
     });
 
     // avoid submit by pressing ENTER
