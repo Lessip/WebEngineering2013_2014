@@ -316,7 +316,14 @@ thead td {
 #map-canvas {
     height: 480px;
     width: 480px;
-    float: left;
+}
+
+.dl-horizontal{
+    font-weight: bold;
+}
+
+.dl-horizontal>dd{
+    font-weight: normal;
 }
 
 .result {
