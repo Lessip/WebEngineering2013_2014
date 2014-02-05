@@ -47,7 +47,7 @@
         </th>
     </tr>
 
-    @foreach (CarSharing.Models.UserProfile userItem in ViewData.Model.userTable)
+    @*@foreach (CarSharing.Models.UserProfile userItem in ViewData.Model.userTable)
     {
         <tr>
             <td>
@@ -87,7 +87,7 @@
                 @Html.DisplayFor(modelItem => userItem.city)
             </td>
         </tr>
-    }
+    }*@
 </table>
 
 <table class="table">
@@ -140,7 +140,7 @@
         </th>
     </tr>
 
-    @foreach (CarSharing.Models.CarProfile carItem in ViewData.Model.carTable)
+    @*@foreach (CarSharing.Models.CarProfile carItem in ViewData.Model.carTable)
     {
         <tr>
             <td>
@@ -189,63 +189,63 @@
                 @Html.DisplayFor(modelItem => carItem.price)
             </td>
         </tr>
-    }
+    }*@
 </table>
 
 <table class="table">
-<tr>
-    <th>
-        ID
-    </th>
-    <th>
-        User ID
-    </th>
-    <th>
-        PickUp - date
-    </th>
-    <th>
-        Return - date
-    </th>
-    <th>
-        Pickup location
-    </th>
-    <th>
-        Return location
-    </th>
-    <th>
-        Distance
-    </th>
-    <th>
-        Price
-    </th>
-</tr>
-@foreach (CarSharing.contract contractItem in ViewData.Model.contractTable)
-    {
     <tr>
-        <td>
-            @Html.DisplayFor(wrapperItem => contractItem.id)
-        </td>
-        <td>
-            @Html.DisplayFor(wrapperItem => contractItem.user_id)
-        </td>
-        <td>
-            @Html.DisplayFor(wrapperItem => contractItem.pick_up_date)
-        </td>
-        <td>
-            @Html.DisplayFor(wrapperItem => contractItem.return_date)
-        </td>
-        <td>
-            @Html.DisplayFor(wrapperItem => contractItem.start_location)
-        </td>
-        <td>
-            @Html.DisplayFor(wrapperItem => contractItem.end_location)
-        </td>
-        <td>
-            @Html.DisplayFor(wrapperItem => contractItem.distance)
-        </td>
-        <td>
-            @Html.DisplayFor(wrapperItem => contractItem.price)
-        </td>
+        <th>
+            ID
+        </th>
+        <th>
+            User ID
+        </th>
+        <th>
+            PickUp - date
+        </th>
+        <th>
+            Return - date
+        </th>
+        <th>
+            Pickup location
+        </th>
+        <th>
+            Return location
+        </th>
+        <th>
+            Distance
+        </th>
+        <th>
+            Price
+        </th>
     </tr>
-}
+    @*@foreach (CarSharing.contract contractItem in ViewData.Model.contractTable)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.id)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.user_id)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.pick_up_date)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.return_date)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.start_location)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.end_location)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.distance)
+            </td>
+            <td>
+                @Html.DisplayFor(wrapperItem => contractItem.price)
+            </td>
+        </tr>
+    }*@
 </table>
