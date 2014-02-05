@@ -262,9 +262,9 @@ namespace CarSharing.Views
         public ActionResult UserDeleteConfirmed(int id)
         {
             user_account userAccount = db.user.Find(id);
-            db.user.Remove(userAccount);
+            userAccount.remove_date = DateTime.Now;
             user_address userAddress = db.user_address.Find(id);
-            db.user_address.Remove(userAddress);
+            userAddress.remove_date = DateTime.Now;
             db.SaveChanges();
             return RedirectToAction("UserView");
         }
@@ -502,7 +502,7 @@ namespace CarSharing.Views
         public ActionResult CarDeleteConfirmed(int id)
         {
             car car = db.car.Find(id);
-            db.car.Remove(car);
+            car.remove_date = DateTime.Now;
             db.SaveChanges();
             return RedirectToAction("CarView");
         }
@@ -588,7 +588,8 @@ namespace CarSharing.Views
         public ActionResult CarTypeDeleteConfirmed(int id)
         {
             car_type carType = db.car_type.Find(id);
-            db.car_type.Remove(carType);
+            carType.remove_date = DateTime.Now;
+            db.Entry(carType).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("CarView");
         }
