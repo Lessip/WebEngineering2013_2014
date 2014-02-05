@@ -52,6 +52,8 @@ namespace CarSharing.Models
         public String post_code { get; set; }
         [Display(Name = "City")]
         public String city { get; set; }
+        [Display(Name = "Deleted")]
+        public Nullable<DateTime> deleteDate { get; set; }
 
         // Constructors for new userprofiles
         // Standard contrustor
@@ -73,9 +75,10 @@ namespace CarSharing.Models
             access_state = (int)new_user.access_state;
             identity_number = (Guid)new_user.identity_number;
             timelimit = (DateTime)new_user.timelimit;
+            deleteDate = (DateTime)new_user.remove_date;
             street = new_user_address.street;
             post_code = new_user_address.post_code;
-            city = new_user_address.city;
+            city = new_user_address.city;            
         }
     }
 

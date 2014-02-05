@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using PostSharp.Extensibility;
 using PostSharp.Patterns.Diagnostics;
-using PostSharp.Extensibility;
-using System.Net;
+using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Net.Configuration;
+using System.Net.Mail;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.Mvc;
 
 namespace CarSharing.Views
 {
@@ -17,7 +20,7 @@ namespace CarSharing.Views
 
         //
         // GET: /Admin/
-        // Show the overview/statistics page
+        // Show the error page - because it normally cannot be reached except by "manipulating" the url
         public ActionResult Index()
         {
             return View();
@@ -179,6 +182,20 @@ namespace CarSharing.Views
         {
             if (ModelState.IsValid)
             {
+                // get the current right of the user_address to compare it to the new value
+                var rightsValue = Convert.ToInt32((from entry in db.user where entry.id == user.id select entry.access_state).Single());
+                // get the email address from the user
+                var emailAddress = Convert.ToString((from entry in db.user where entry.id == user.id select entry.email).Single());
+                if (rightsValue != user.access_state)
+                {
+                    if(user.email != "")
+                    {
+                        emailAddress = user.email;
+                    }
+                    ChangeUserRights(emailAddress, user.access_state);
+                }
+
+                // Create a new user object which is passed to the database
                 user_account userAccount = db.user.Find(user.id);
                 userAccount.login_name = user.login_name;
                 userAccount.password = user.password;
@@ -250,6 +267,59 @@ namespace CarSharing.Views
             db.SaveChanges();
             return RedirectToAction("UserView");
         }
+
+        // Method to send an email to the user if his rights were changed
+        [Log]
+        public void ChangeUserRights(String email, int rightValue)
+        {
+            // Get the settings for the sending mail-service
+            System.Net.Configuration.MailSettingsSectionGroup mMailSettings = WebConfigurationManager.OpenWebConfiguration(Request.ApplicationPath).GetSectionGroup("system.net/mailSettings") as MailSettingsSectionGroup;
+            
+            // General settings for the current email
+            string To = email;
+            string From = "UserService.EiffeltowerCarSharing@gmail.com";
+            string Subject = "";
+            string Body = "";
+
+            
+
+            switch(rightValue)
+            {
+                case 0:
+                    Subject = "Eiffeltower Carsharing - Your account is deactivated";
+                    Body = "Dear Sir or Madam,<br /><br />your account has been deactivated.<br /><br />Yours sincerly,<br />the Eiffeltower Carsharing Team";
+                    break;
+                case 1:
+                    Subject = "Eiffeltower Carsharing - Your account is activated";
+                    Body = "Dear Sir or Madam,<br /><br />congratulations! Your account has been activated and you can use our service now.<br /><br />Yours sincerly,<br />the Eiffeltower Carsharing Team";
+                    break;
+                case 2:
+                    Subject = "Eiffeltower Carsharing - Your admin-account is activated";
+                    Body = "Dear colleague,<br /><br />your admin-account has been activated.<br />Welcome in our team!!!<br /><br />Best regards,<br />the Eiffeltower Carsharing Team";
+                    break;
+                default:
+                    Subject = "Eiffeltower Carsharing - Changed user rights";
+                    Body = "Dear Sir or Madam,<br /><br />there occured an error somewhere in our system - you should not have gotten this email ;-)<br /><br />Yours sincerly,<br />the Eiffeltower Carsharing Team";
+                    break;
+            }
+
+            MailMessage mm = new MailMessage(From, To, Subject, Body);
+            mm.IsBodyHtml = true;
+            SmtpClient sc = new SmtpClient(mMailSettings.Smtp.Network.Host, mMailSettings.Smtp.Network.Port);
+            NetworkCredential netCred = new NetworkCredential(mMailSettings.Smtp.Network.UserName, mMailSettings.Smtp.Network.Password);
+            sc.EnableSsl = mMailSettings.Smtp.Network.EnableSsl;
+            sc.UseDefaultCredentials = mMailSettings.Smtp.Network.DefaultCredentials;
+            sc.Credentials = netCred;
+            try
+            {
+                sc.Send(mm);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+        }
+
 
         /*
          * The CAR-section
@@ -433,18 +503,6 @@ namespace CarSharing.Views
             db.car.Remove(car);
             db.SaveChanges();
             return RedirectToAction("CarView");
-        }
-
-        //[Log]
-        public void updateUserRights()
-        {
-            // update user rights in the database
-        }
-
-        //[Log]
-        public void getUserRights()
-        {
-            // read user rights from the database
         }
 
         /*
