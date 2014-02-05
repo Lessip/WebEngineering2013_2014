@@ -168,7 +168,7 @@
           <Property Name="parking_pos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="contract" Relationship="Self.FK_car_contract" FromRole="car" ToRole="contract" />
           <NavigationProperty Name="car_type" Relationship="Self.FK_type_car" FromRole="car" ToRole="car_type" />
-          <Property Name="remove_date" Type="DateTime" Precision="3" />
+          <Property Name="remove_date" Type="DateTime" Precision="3" Nullable="true" />
         </EntityType>
         <EntityType Name="car_type">
           <Key>
@@ -180,7 +180,7 @@
           <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="car" Relationship="Self.FK_type_car" FromRole="car_type" ToRole="car" />
           <Property Name="seat_size" Type="Int32" />
-          <Property Name="remove_date" Type="DateTime" Precision="3" />
+          <Property Name="remove_date" Type="DateTime" Precision="3" Nullable="true" />
         </EntityType>
         <EntityType Name="contract">
           <Key>
@@ -214,7 +214,7 @@
           <NavigationProperty Name="contract" Relationship="Self.FK_user_contract" FromRole="user" ToRole="contract" />
           <NavigationProperty Name="user_address" Relationship="Self.FK_user_address" FromRole="user" ToRole="user_address" />
           <Property Name="timelimit" Type="DateTime" Precision="3" />
-          <Property Name="remove_date" Type="DateTime" Precision="3" />
+          <Property Name="remove_date" Type="DateTime" Precision="3" Nullable="true" />
         </EntityType>
         <EntityType Name="user_address">
           <Key>
@@ -226,7 +226,7 @@
           <Property Name="post_code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="city" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="user" Relationship="Self.FK_user_address" FromRole="user_address" ToRole="user" />
-          <Property Name="remove_date" Type="DateTime" Precision="3" />
+          <Property Name="remove_date" Type="DateTime" Precision="3" Nullable="true" />
         </EntityType>
         <Association Name="FK_car_contract">
           <End Role="car" Type="Self.car" Multiplicity="1" />

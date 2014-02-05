@@ -15,6 +15,8 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.Configuration;
+using System.Net.Configuration;
 
 
 namespace CarSharing.Controllers
@@ -93,11 +95,8 @@ namespace CarSharing.Controllers
                 }
 
                 // SMTP options
-                string Host = "smtp.gmail.com";
-                Int16 Port = 587;
-                bool SSL = true;
-                string Username = "eiffeltowercarsharing@gmail.com";
-                string Password = "EiffeltowerJPGM";
+                // Get the settings for the sending mail-service
+                System.Net.Configuration.MailSettingsSectionGroup mMailSettings = WebConfigurationManager.OpenWebConfiguration(Request.ApplicationPath).GetSectionGroup("system.net/mailSettings") as MailSettingsSectionGroup;
 
                 // Mail options
                 if (user.identity_number != null)
@@ -116,10 +115,10 @@ namespace CarSharing.Controllers
 
                     MailMessage mm = new MailMessage(From, To, Subject, Body);
                     mm.IsBodyHtml = true;
-                    SmtpClient sc = new SmtpClient(Host, Port);
-                    NetworkCredential netCred = new NetworkCredential(Username, Password);
-                    sc.EnableSsl = SSL;
-                    sc.UseDefaultCredentials = false;
+                    SmtpClient sc = new SmtpClient(mMailSettings.Smtp.Network.Host, mMailSettings.Smtp.Network.Port);
+                    NetworkCredential netCred = new NetworkCredential(mMailSettings.Smtp.Network.UserName, mMailSettings.Smtp.Network.Password);
+                    sc.EnableSsl = mMailSettings.Smtp.Network.EnableSsl;
+                    sc.UseDefaultCredentials = mMailSettings.Smtp.Network.DefaultCredentials;
                     sc.Credentials = netCred;
                     try
                     {
