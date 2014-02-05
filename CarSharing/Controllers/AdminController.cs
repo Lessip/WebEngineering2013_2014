@@ -40,6 +40,7 @@ namespace CarSharing.Views
             var queryResult = from userId in db.user
                               join userAddress in db.user_address
                               on userId.id equals userAddress.user_id
+                              where userId.remove_date == null
                               select new CarSharing.Models.UserProfile
                               {
                                   id = userId.id,
@@ -335,6 +336,7 @@ namespace CarSharing.Views
             var carListQueryResult = from carId in db.car
                               join carType in db.car_type
                               on carId.car_type_id equals carType.id
+                              where carId.remove_date == null
                               select new CarSharing.Models.CarProfile
                               {
                                   id = carId.id,
@@ -655,6 +657,20 @@ namespace CarSharing.Views
                 return RedirectToAction("ContractView");
             }
             return View(contract_element);
+        }
+
+        /*
+         * The SIMULATION-section
+         * 
+         * where all methods concerning the simulation-data are defined
+         */
+
+        // GET: /Admin/TimeSimulationView
+        // Show the simulation view
+        public ActionResult TimeSimulationView()
+        {
+            CarSharing.Models.TimeSimulation tSimulation = new Models.TimeSimulation();
+            return View(tSimulation);
         }
     }
 }
