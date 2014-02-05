@@ -326,6 +326,23 @@ thead td {
     box-shadow: 2px 2px 2px #666;
 }
 
+.result:hover {
+    margin-bottom: 5px;
+    background-color: #F4C833;
+    border-radius: 5px;
+    box-shadow: 0px 0px 0px #666;
+}
+
+.resultcell {
+    display: block;
+    float: left;
+    margin: 5px;
+    width: 100px;
+    padding: 5px;
+    vertical-align: middle;
+}
+
+
 .info {
     width: 100%;
     padding: 10px;

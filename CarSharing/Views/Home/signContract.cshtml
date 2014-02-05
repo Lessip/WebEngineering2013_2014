@@ -1,0 +1,89 @@
+﻿@model CarSharing.contract
+
+@{
+    ViewBag.Title = "signContract";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ContractCreate</h2>
+@if (ViewBag.msg != "" && ViewBag.msg != null){
+    <div class="info" id="infobox">@ViewBag.msg</div>
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.user_id, "Your Customer Number", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="text-box single-line" id="user_id" name="user_id" type="hidden" value="7" />
+                <!-- get current user.id -->
+                7
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.car_id, "Car Number", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="text-box single-line" id="car_id" name="car_id" type="number" value="@ViewBag.carNumber" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.pick_up_date, "Pickup Date", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="text-box single-line" id="pick_up_date" name="pick_up_date" type="datetime" value="@ViewBag.pickupDate @ViewBag.pickupTime" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.return_date, "Return Date", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="text-box single-line" id="return_date" name="return_date" type="datetime" value="@ViewBag.returnDate @ViewBag.returnTime" required />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.start_location, "Pickup Location", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="start_location" name="start_location" type="hidden" value="@ViewBag.latLng1" />
+                <input class="text-box single-line" id="start_location_dummy" name="start_location_dummy" type="text" value="@ViewBag.pickupLocation" disabled />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.end_location, "Return Location", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="end_location_dummy" name="end_location" type="hidden" value="@ViewBag.latLng2" />
+                <input class="text-box single-line" id="end_location_dummy" name="end_location_dummy" type="text" value="@ViewBag.returnLocation" disabled />
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.distance,"Estimated Distance", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="text-box single-line" id="distance" name="distance" type="number" value="" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, "Price", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input class="text-box single-line" id="price" name="price" type="hidden" value="@ViewBag.price"/>
+                @ViewBag.price €
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="sign contract" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to Search", "Index")
+</div>
